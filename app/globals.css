@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --site-color-light: var(--color-emerald-50);
+  --site-color-dark: var(--color-indigo-950);
+  --font-color-light: var(--color-black);
+  --font-color-dark: var(--color-emerald-50);
+  --line-color-light: var(--color-slate-400);
+  --line-color-dark: var(--color-slate-600);
+  --accent-color-light: var(--color-violet-400);
+  --accent-color-dark: var(--color-emerald-200);
+  --button-color-primary-fill-light: var(--color-violet-400);
+  --button-color-primary-font-light: var(--color-emerald-50);
+  --button-color-primary-fill-dark: var(--color-emerald-200);
+  --button-color-primary-font-dark: var(--color-slate-900);
+  --button-color-primary-hover-light: var(--color-violet-700);
+  --button-color-secondary-fill-light: var(--color-violet-200);
+  --button-color-secondary-font-light: var(--color-slate-500);
+  --button-color-secondary-fill-dark: var(--color-emerald-700);
+  --button-color-secondary-font-dark: var(--color-slate-300);
+  --button-color-secondary-hover-dark: var(--color-violet-500);
+  --icon-color-interaction-stroke-light: var(--color-black);
+  --icon-color-interaction-stroke-dark: var(--color-emerald-50);
+
+  --navbar-height: 3.5rem;
+
+  --site-color: var(--site-color-light);
+  --font-color: var(--font-color-light);
+  --line-color: var(--line-color-light);
+  --accent-color: var(--accent-color-light);
+  --button-color-primary-fill: var(--button-color-primary-fill-light);
+  --button-color-primary-font: var(--button-color-primary-font-light);
+  --button-color-primary-hover: var(--button-color-primary-hover-light);
+  --button-color-secondary-fill: var(--button-color-secondary-fill-light);
+  --button-color-secondary-font: var(--button-color-secondary-font-light);
+  --button-color-secondary-hover: var(--buton-color-secondary-hover-light);
+  --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-light);
+}
+
+@theme inline {
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+[data-theme="dark"] {
+  --site-color: var(--site-color-dark);
+  --font-color: var(--font-color-dark);
+  --line-color: var(--line-color-dark);
+  --accent-color: var(--accent-color-dark);
+  --button-color-primary-fill: var(--button-color-primary-fill-dark);
+  --button-color-primary-font: var(--button-color-primary-font-dark);
+  --button-color-primary-hover: var(--button-color-primary-hover-dark);
+  --button-color-secondary-fill: var(--button-color-secondary-fill-dark);
+  --button-color-secondary-font: var(--button-color-secondary-font-dark);
+  --button-color-secondary-hover: var(--button-color-secondary-hover-dark);
+  --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-dark);
+}
+
+body {
+  background: var(--site-color);
+  color: var(--font-color);
+  font-family: var(--font-inter), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 2rem 0.5rem 1rem 0.5rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+}
+
+h1 {
+  font-size: 2rem; /* 32px */
+}
+
+h2 {
+  font-size: 1.5625rem; /* 25px */
+}
+
+h3 {
+  font-size: 1.25rem; /* 20px */
+}
+
+span {
+  display: inline-block;
+  padding: 0 calc(var(--spacing) * 2);
+}
+
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition:
+    background-color 300ms ease-in-out,
+    color 300ms ease-in-out,
+    border-color 300ms ease-in-out;
+}

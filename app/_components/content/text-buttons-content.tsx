@@ -9,9 +9,9 @@ export default function TextButtonsContent({
   secondaryButtonHref?: string
 }>) {
   return (
-    <section className="flex flex-col p-5 gap-2">
+    <section className="flex flex-col py-5 px-5 md:px-10 gap-2">
       <h2>{title}</h2>
-      <span>{text}</span>
+      <span className="my-2 px-2">{text}</span>
       <div className="flex pt-4 gap-2">
         <div className="p-2">
           <button className="px-4 py-2 rounded-lg bg-(--button-color-primary-fill) text-(--button-color-primary-font) hover:shadow-sm hover:shadow-violet-700 dark:hover:shadow-emerald-50 active:shadow-none">

@@ -3,9 +3,9 @@ export default function TextContent({ title, text }: Readonly<{
   text: string
 }>) {
   return (
-    <section className="flex flex-col p-5 gap-2">
+    <section className="flex flex-col py-5 px-5 md:px-10 gap-2">
       <h2>{title}</h2>
-      <span>{text}</span>
+      <span className="my-2 px-2">{text}</span>
     </section>
   );
 }

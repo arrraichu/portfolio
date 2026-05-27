@@ -44,10 +44,10 @@ function NavMenuItemMainBlock({ title, description, href }: Readonly<{
   href: string,
 }>) {
   return (
-    <div className="w-full flex flex-col gap-2 p-5 border-b border-b-(--line-color)">
+    <div className="w-full flex flex-col gap-2 py-5 px-5 md:px-8 border-b border-b-(--line-color)">
       <div className="text-xs text-(--accent-color) font-semibold uppercase tracking-wider">{title}</div>
       <div className="flex justify-between">
-        <span className="text-xl px-0!">{description}</span>
+        <span className="text-xl px-0">{description}</span>
         <ArrowRightCircleIcon className="size-6 text-(--accent-color)" />
       </div>
     </div>
@@ -56,9 +56,9 @@ function NavMenuItemMainBlock({ title, description, href }: Readonly<{
 
 function NavMenuItemBottomBlock() {
   return (
-    <div className="w-full flex flex-col gap-2 p-5">
+    <div className="w-full flex flex-col gap-2 py-5 px-5 md:px-8">
       <div className="text-xs text-(--accent-color) font-semibold uppercase tracking-wider">Contact</div>
-      <div className="w-full flex px-4 py-2 justify-between">
+      <div className="w-full flex py-2 px-4 justify-between">
         <div className="w-full flex flex-col gap-4">
           <div className="flex gap-2 opacity-50">
             <GitIcon className="size-5 text-(--font-color) dark:text-(--accent-color)" />

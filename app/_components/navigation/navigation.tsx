@@ -21,7 +21,7 @@ export default function Nav() {
   return (
     <>
       <header className="fixed w-full h-(--navbar-height) py-4 bg-(--site-color) border-b-[1.5px] border-b-(--line-color) z-50">
-        <nav className="flex justify-between items-center px-5">
+        <nav className="flex justify-between items-center px-5 md:px-8">
           <div className="left-content flex gap-2">
             <Image src="/vdiamond.svg" width={24} height={24} alt="Website icon" />
             <span className="text-xl font-medium [text-box:trim-end_cap_alphabetic] align-baseline">Raymond Chu</span>

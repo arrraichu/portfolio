@@ -47,7 +47,7 @@ function NavMenuItemMainBlock({ title, description, href }: Readonly<{
     <div className="w-full flex flex-col gap-2 p-5 border-b border-b-(--line-color)">
       <div className="text-xs text-(--accent-color) font-semibold uppercase tracking-wider">{title}</div>
       <div className="flex justify-between">
-        <span className="text-xl">{description}</span>
+        <span className="text-xl px-0!">{description}</span>
         <ArrowRightCircleIcon className="size-6 text-(--accent-color)" />
       </div>
     </div>

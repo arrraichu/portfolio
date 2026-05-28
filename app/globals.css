@@ -23,6 +23,8 @@
   --button-color-secondary-hover-dark: var(--color-violet-500);
   --icon-color-interaction-stroke-light: var(--color-black);
   --icon-color-interaction-stroke-dark: var(--color-emerald-50);
+  --highlight-color-light: var(--color-amber-300);
+  --highlight-color-dark: var(--color-amber-700);
 
   --navbar-height: 3.5rem;
 
@@ -37,6 +39,7 @@
   --button-color-secondary-font: var(--button-color-secondary-font-light);
   --button-color-secondary-hover: var(--buton-color-secondary-hover-light);
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-light);
+  --highlight-color: var(--highlight-color-light);
 }
 
 @theme inline {
@@ -57,6 +60,7 @@
   --button-color-secondary-font: var(--button-color-secondary-font-dark);
   --button-color-secondary-hover: var(--button-color-secondary-hover-dark);
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-dark);
+  --highlight-color: var(--highlight-color-dark);
 }
 
 body {
@@ -99,4 +103,20 @@ span {
     background-color 300ms ease-in-out,
     color 300ms ease-in-out,
     border-color 300ms ease-in-out;
+}
+
+.highlighter {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+.highlighter:hover:after {
+  content: "";
+  position: absolute;
+  border-radius: 2px;
+  inset: 0 calc(var(--spacing) * -1.0);
+  background: var(--highlight-color);
+  opacity: 0.75;
+  transform: skewX(-2deg);
+  z-index: -1;
 }

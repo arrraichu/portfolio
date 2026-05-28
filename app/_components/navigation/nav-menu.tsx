@@ -11,7 +11,7 @@ export default function NavMenu({ref, isOpen, setOpen}: {
   return (
     <nav
       className={clsx(
-        "fixed w-full mt-(--navbar-height) z-10 bg-(--site-color) border-b border-b-(--line-color) ease-out duration-300",
+        "fixed w-full mt-(--navbar-height) z-10 bg-(--site-color) border-b border-b-(--line-color) ease-out duration-300 lg:hidden",
         {
           'translate-y-0': isOpen,
           '-translate-y-full': !isOpen

@@ -51,7 +51,7 @@ export default function Nav() {
               <span className="text-lg font-semibold text-(--accent-color) opacity-60 hover:opacity-100">Demos</span>
               <span className="text-lg font-semibold text-(--accent-color) opacity-60 hover:opacity-100">Resume</span>
             </div>
-            <div className="hidden lg:flex gap-6 items-end">
+            <div className="hidden lg:flex gap-6 items-center">
               <SunIcon
                 className="size-6 text-(--icon-color-interaction-stroke)"
                 onClick={() => flipTheme()}

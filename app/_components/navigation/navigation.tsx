@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import { Bars3Icon, SunIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 
 import GitIcon from '@/public/git.svg';
 import { useThemes } from '@/app/_hooks/theme-provider';
@@ -37,7 +37,11 @@ export default function Nav() {
           </div>
           <div className="icons flex gap-6 lg:gap-8">
             <SunIcon
-              className="size-6 text-(--icon-color-interaction-stroke) lg:hidden"
+              className="block dark:hidden size-6 text-(--icon-color-interaction-stroke) lg:hidden lg:dark:hidden"
+              onClick={() => flipTheme()}
+            />
+            <MoonIcon
+              className="hidden dark:block size-6 text-(--icon-color-interaction-stroke) lg:hidden lg:dark:hidden"
               onClick={() => flipTheme()}
             />
             <Bars3Icon
@@ -53,7 +57,11 @@ export default function Nav() {
             </div>
             <div className="hidden lg:flex gap-6 items-center">
               <SunIcon
-                className="size-6 text-(--icon-color-interaction-stroke)"
+                className="block dark:hidden size-6 text-(--icon-color-interaction-stroke)"
+                onClick={() => flipTheme()}
+              />
+              <MoonIcon
+                className="hidden dark:block size-6 text-(--icon-color-interaction-stroke)"
                 onClick={() => flipTheme()}
               />
             </div>

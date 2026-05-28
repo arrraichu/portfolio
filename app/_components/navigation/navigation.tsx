@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { useRef } from 'react';
 import Image from 'next/image';
 import { Bars3Icon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
@@ -56,10 +57,10 @@ export default function Nav() {
               onClick={() => setMenuOpen(!menuOpen)}
             />
 
-            <div className="hidden lg:flex gap-6 items-end">
-              <span className="text-xl font-bold text-(--accent-color) opacity-75 hover:opacity-100 hover:underline">Portfolio</span>
-              <span className="text-xl font-bold text-(--accent-color) opacity-75 hover:opacity-100 hover:underline">Demos</span>
-              <span className="text-xl font-bold text-(--accent-color) opacity-75 hover:opacity-100 hover:underline">Resume</span>
+            <div className="hidden lg:flex gap-4 items-end">
+              <span className="text-xl font-bold highlighter px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:cursor-pointer">Portfolio</span>
+              <span className="text-xl font-bold highlighter px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:cursor-pointer">Demos</span>
+              <span className="text-xl font-bold highlighter px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:cursor-pointer">Resume</span>
             </div>
             <div className="hidden lg:flex gap-6 items-center">
               <SunIcon

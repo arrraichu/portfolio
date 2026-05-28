@@ -66,7 +66,7 @@ function NavMenuItemBottomBlock() {
             rel="noopener noreferrer"
             aria-label="Github link (opens in new tab)"
             >
-            <GitIcon className="size-5 text-(--font-color) dark:text-(--accent-color)" />
+            <GitIcon className="size-5 text-(--accent-color)" />
             <span className="text-s px-2">arrraichu</span>
           </a>
         </div>
@@ -77,7 +77,7 @@ function NavMenuItemBottomBlock() {
             rel="noopener noreferrer"
             aria-label="Github link (opens in new tab)"
             >
-            <GitIcon className="size-5 text-(--font-color) dark:text-(--accent-color)" />
+            <GitIcon className="size-5 text-(--accent-color)" />
             <span className="text-s px-2">arrraichu</span>
           </a>
         </div>

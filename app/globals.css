@@ -110,13 +110,17 @@ span {
   display: inline-block;
   isolation: isolate;
 }
-.highlighter:hover:after {
+.highlighter::after {
   content: "";
   position: absolute;
   border-radius: 2px;
   inset: 0 calc(var(--spacing) * -1.0);
   background: var(--highlight-color);
-  opacity: 0.75;
+  opacity: 0;
   transform: skewX(-2deg);
   z-index: -1;
+  pointer-events: none;
+}
+.highlighter:hover::after {
+  opacity: 0.75;
 }

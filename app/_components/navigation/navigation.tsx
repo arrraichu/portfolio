@@ -32,20 +32,26 @@ export default function Nav() {
               <span className="text-xl font-medium [text-box:trim-end_cap_alphabetic] align-baseline">Raymond Chu</span>
             </div>
             <div className="hidden lg:flex gap-4 items-end">
-              <GitIcon className="size-5 text-(--accent-color) opacity-75 hover:opacity-100" />
+              <a className="opacity-75 hover:opacity-100"
+                href="https://github.com/arrraichu"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Github link (opens in new tab)">
+                <GitIcon className="size-5 text-(--accent-color)" />
+              </a>
             </div>
           </div>
           <div className="icons flex gap-6 lg:gap-8">
             <SunIcon
-              className="block dark:hidden size-6 text-(--icon-color-interaction-stroke) lg:hidden lg:dark:hidden"
+              className="block dark:hidden size-6 text-(--icon-color-interaction-stroke) hover:cursor-pointer lg:hidden lg:dark:hidden"
               onClick={() => flipTheme()}
             />
             <MoonIcon
-              className="hidden dark:block size-6 text-(--icon-color-interaction-stroke) lg:hidden lg:dark:hidden"
+              className="hidden dark:block size-6 text-(--icon-color-interaction-stroke) hover:cursor-pointer lg:hidden lg:dark:hidden"
               onClick={() => flipTheme()}
             />
             <Bars3Icon
-              className="size-6 text-(--icon-color-interaction-stroke) lg:hidden"
+              className="size-6 text-(--icon-color-interaction-stroke) hover:cursor-pointer lg:hidden"
               ref={hamburgerIconRef}
               onClick={() => setMenuOpen(!menuOpen)}
             />
@@ -57,11 +63,11 @@ export default function Nav() {
             </div>
             <div className="hidden lg:flex gap-6 items-center">
               <SunIcon
-                className="block dark:hidden size-6 text-(--icon-color-interaction-stroke)"
+                className="block dark:hidden size-6 text-(--icon-color-interaction-stroke) hover:cursor-pointer"
                 onClick={() => flipTheme()}
               />
               <MoonIcon
-                className="hidden dark:block size-6 text-(--icon-color-interaction-stroke)"
+                className="hidden dark:block size-6 text-(--icon-color-interaction-stroke) hover:cursor-pointer"
                 onClick={() => flipTheme()}
               />
             </div>

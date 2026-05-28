@@ -59,17 +59,27 @@ function NavMenuItemBottomBlock() {
     <div className="w-full flex flex-col gap-2 py-5 px-5 md:px-8">
       <div className="text-xs text-(--accent-color) font-semibold uppercase tracking-wider">Contact</div>
       <div className="w-full flex py-2 px-4 justify-between">
-        <div className="w-full flex flex-col gap-4">
-          <div className="flex gap-2 opacity-50">
+        <div className="w-full flex content-start">
+          <a className="flex gap-2 opacity-75 hover:opacity-100"
+            href="https://github.com/arrraichu"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Github link (opens in new tab)"
+            >
             <GitIcon className="size-5 text-(--font-color) dark:text-(--accent-color)" />
             <span className="text-s px-2">arrraichu</span>
-          </div>
+          </a>
         </div>
-        <div className="w-full flex gap-2">
-          <div className="flex gap-2 opacity-50">
+        <div className="w-full flex content-start">
+          <a className="flex gap-2 opacity-75 hover:opacity-100"
+            href="https://github.com/arrraichu"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Github link (opens in new tab)"
+            >
             <GitIcon className="size-5 text-(--font-color) dark:text-(--accent-color)" />
             <span className="text-s px-2">arrraichu</span>
-          </div>
+          </a>
         </div>
       </div>
     </div>

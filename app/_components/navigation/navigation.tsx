@@ -32,7 +32,7 @@ export default function Nav() {
               <span className="text-xl font-medium [text-box:trim-end_cap_alphabetic] align-baseline">Raymond Chu</span>
             </div>
             <div className="hidden lg:flex gap-4 items-end">
-              <GitIcon className="size-5 text-(--font-color) dark:text-(--accent-color) opacity-60 hover:opacity-100" />
+              <GitIcon className="size-5 text-(--accent-color) opacity-75 hover:opacity-100" />
             </div>
           </div>
           <div className="icons flex gap-6 lg:gap-8">
@@ -47,9 +47,9 @@ export default function Nav() {
             />
 
             <div className="hidden lg:flex gap-6 items-end">
-              <span className="text-lg font-semibold text-(--accent-color) opacity-60 hover:opacity-100">Portfolio</span>
-              <span className="text-lg font-semibold text-(--accent-color) opacity-60 hover:opacity-100">Demos</span>
-              <span className="text-lg font-semibold text-(--accent-color) opacity-60 hover:opacity-100">Resume</span>
+              <span className="text-xl font-bold text-(--accent-color) opacity-75 hover:opacity-100 hover:underline">Portfolio</span>
+              <span className="text-xl font-bold text-(--accent-color) opacity-75 hover:opacity-100 hover:underline">Demos</span>
+              <span className="text-xl font-bold text-(--accent-color) opacity-75 hover:opacity-100 hover:underline">Resume</span>
             </div>
             <div className="hidden lg:flex gap-6 items-center">
               <SunIcon

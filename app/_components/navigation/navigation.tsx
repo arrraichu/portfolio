@@ -31,7 +31,7 @@ export default function Nav() {
               <Image src="/vdiamond.svg" width={24} height={24} alt="Website icon" />
               <span className="text-xl font-medium [text-box:trim-end_cap_alphabetic] align-baseline">Raymond Chu</span>
             </div>
-            <div className="hidden lg:flex gap-4 items-end">
+            <div className="hidden lg:flex gap-4 items-center">
               <a className="opacity-75 hover:opacity-100"
                 href="https://github.com/arrraichu"
                 target="_blank"

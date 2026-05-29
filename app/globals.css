@@ -104,23 +104,3 @@ span {
     color 300ms ease-in-out,
     border-color 300ms ease-in-out;
 }
-
-.highlighter {
-  position: relative;
-  display: inline-block;
-  isolation: isolate;
-}
-.highlighter::after {
-  content: "";
-  position: absolute;
-  border-radius: 2px;
-  inset: 0 calc(var(--spacing) * -1.0);
-  background: var(--highlight-color);
-  opacity: 0;
-  transform: skewX(-2deg);
-  z-index: -1;
-  pointer-events: none;
-}
-.highlighter:hover::after {
-  opacity: 0.75;
-}

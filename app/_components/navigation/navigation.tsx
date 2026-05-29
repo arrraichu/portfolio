@@ -58,9 +58,9 @@ export default function Nav() {
             />
 
             <div className="hidden lg:flex gap-4 items-end">
-              <span className="text-xl font-bold highlighter px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:cursor-pointer">Portfolio</span>
-              <span className="text-xl font-bold highlighter px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:cursor-pointer">Demos</span>
-              <span className="text-xl font-bold highlighter px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:cursor-pointer">Resume</span>
+              <span className="text-xl font-bold px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:outline-2 hover:outline-(--accent-color) hover:rounded-sm hover:cursor-pointer">Portfolio</span>
+              <span className="text-xl font-bold px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:outline-2 hover:outline-(--accent-color) hover:rounded-sm hover:cursor-pointer">Demos</span>
+              <span className="text-xl font-bold px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:outline-2 hover:outline-(--accent-color) hover:rounded-sm hover:cursor-pointer">Resume</span>
             </div>
             <div className="hidden lg:flex gap-6 items-center">
               <SunIcon

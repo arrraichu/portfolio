@@ -1,3 +1,5 @@
+import { PrimaryButton, SecondaryButton } from "../buttons/buttons";
+
 export default function TextButtonsContent({
   title, text, primaryButtonText, primaryButtonHref, secondaryButtonText, secondaryButtonHref
 }: Readonly<{
@@ -14,15 +16,11 @@ export default function TextButtonsContent({
       <span className="my-2 px-2">{text}</span>
       <div className="flex pt-4 gap-2">
         <div className="p-2">
-          <button className="px-4 py-2 rounded-lg bg-(--button-color-primary-fill) text-(--button-color-primary-font) hover:shadow-sm hover:shadow-violet-700 dark:hover:shadow-emerald-50 active:shadow-none">
-            {primaryButtonText}
-          </button>
+          <PrimaryButton text={primaryButtonText} />
         </div>
         {secondaryButtonText && (
           <div className="p-2">
-            <button className="px-4 py-2 rounded-lg bg-(--button-color-secondary-fill) text-(--button-color-secondary-font) hover:shadow-sm hover:shadow-violet-500 dark:shadow-emerald-600 active:shadow-none">
-              {secondaryButtonText}
-            </button>
+            <SecondaryButton text={secondaryButtonText} />
           </div>
         )}
       </div>

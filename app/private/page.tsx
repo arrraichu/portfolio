@@ -9,7 +9,7 @@ const _CURRENT_PATHNAME = "/private";
 
 export default async function Home() {
   const session = await authorize(false, { returnTo: _CURRENT_PATHNAME })
-  const logoutRedirect = encodeURIComponent(`${process.env.HOST}login`);
+  const logoutRedirect = encodeURIComponent(`${process.env.APP_BASE_URL}/login`);
 
   if (!session) {
     return (

@@ -3,6 +3,8 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
+  --neutral-color-light: hsl(0 0% 90%);
+  --neutral-color-dark: hsl(0 0% 10%);
   --site-color-light: var(--color-emerald-50);
   --site-color-dark: var(--color-indigo-950);
   --font-color-light: var(--color-black);
@@ -28,6 +30,7 @@
 
   --navbar-height: 3.5rem;
 
+  --neutral-color: var(--neutral-color-light);
   --site-color: var(--site-color-light);
   --font-color: var(--font-color-light);
   --line-color: var(--line-color-light);
@@ -40,6 +43,8 @@
   --button-color-secondary-hover: var(--buton-color-secondary-hover-light);
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-light);
   --highlight-color: var(--highlight-color-light);
+
+  --mixed-background-color: color-mix(in srgb, var(--site-color), var(--neutral-color));
 }
 
 @theme inline {
@@ -49,6 +54,7 @@
 }
 
 [data-theme="dark"] {
+  --neutral-color: var(--neutral-color-dark);
   --site-color: var(--site-color-dark);
   --font-color: var(--font-color-dark);
   --line-color: var(--line-color-dark);

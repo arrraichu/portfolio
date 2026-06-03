@@ -3,8 +3,6 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
-  --neutral-color-light: hsl(0 0% 90%);
-  --neutral-color-dark: hsl(0 0% 10%);
   --site-color-light: var(--color-emerald-50);
   --site-color-dark: var(--color-indigo-950);
   --font-color-light: var(--color-black);
@@ -30,7 +28,9 @@
 
   --navbar-height: 3.5rem;
 
-  --neutral-color: var(--neutral-color-light);
+  --neutral-color-1: var(--neutral-color-1-light);
+  --neutral-color-2: var(--neutral-color-2-light);
+  --neutral-color-3: var(--neutral-color-3-light);
   --site-color: var(--site-color-light);
   --font-color: var(--font-color-light);
   --line-color: var(--line-color-light);
@@ -44,17 +44,28 @@
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-light);
   --highlight-color: var(--highlight-color-light);
 
-  --mixed-background-color: color-mix(in srgb, var(--site-color), var(--neutral-color));
+  --mixed-background-color-1: color-mix(in srgb, var(--site-color), var(--neutral-color-1));
+  --mixed-background-color-2: color-mix(in srgb, var(--site-color), var(--neutral-color-2));
+  --mixed-background-color-3: color-mix(in srgb, var(--site-color), var(--neutral-color-3));
+
+  --deboss-color-light: var(--color-emerald-400);
+  --deboss-color-dark: var(--color-indigo-600);
+  --deboss-color: var(--deboss-color-light);
+
+  --deboss-color-toneshift-light: var(--color-emerald-600);
+  --deboss-color-toneshift-dark: var(--color-indigo-400);
+  --deboss-color-toneshift: var(--deboss-color-toneshift-light);
 }
 
 @theme inline {
   --font-sans:
     var(--font-inter), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --inset-shadow-md: inset 0px -2.5px 0 var(--deboss-color-toneshift);
 }
 
 [data-theme="dark"] {
-  --neutral-color: var(--neutral-color-dark);
   --site-color: var(--site-color-dark);
   --font-color: var(--font-color-dark);
   --line-color: var(--line-color-dark);
@@ -67,6 +78,9 @@
   --button-color-secondary-hover: var(--button-color-secondary-hover-dark);
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-dark);
   --highlight-color: var(--highlight-color-dark);
+
+  --deboss-color: var(--deboss-color-dark);
+  --deboss-color-toneshift: var(--deboss-color-toneshift-dark);
 }
 
 body {

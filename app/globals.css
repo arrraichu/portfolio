@@ -28,9 +28,6 @@
 
   --navbar-height: 3.5rem;
 
-  --neutral-color-1: var(--neutral-color-1-light);
-  --neutral-color-2: var(--neutral-color-2-light);
-  --neutral-color-3: var(--neutral-color-3-light);
   --site-color: var(--site-color-light);
   --font-color: var(--font-color-light);
   --line-color: var(--line-color-light);
@@ -43,10 +40,6 @@
   --button-color-secondary-hover: var(--buton-color-secondary-hover-light);
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-light);
   --highlight-color: var(--highlight-color-light);
-
-  --mixed-background-color-1: color-mix(in srgb, var(--site-color), var(--neutral-color-1));
-  --mixed-background-color-2: color-mix(in srgb, var(--site-color), var(--neutral-color-2));
-  --mixed-background-color-3: color-mix(in srgb, var(--site-color), var(--neutral-color-3));
 
   --deboss-color-light: var(--color-emerald-400);
   --deboss-color-dark: var(--color-indigo-600);

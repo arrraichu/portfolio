@@ -17,7 +17,7 @@ export default async function authorize(
 
   if (!session) {
     if (!allowNoSession) {
-      const redirectUrl = new URL('/login', process.env.HOST);
+      const redirectUrl = new URL('/login', process.env.APP_BASE_URL);
       if (opts!.returnTo) {
         redirectUrl.searchParams.set(
           'returnTo',
@@ -33,10 +33,10 @@ export default async function authorize(
   const allowedAccounts = process.env.ALLOWED_USER_ACCOUNTS?.split(',') || [];
   const email = session!.user.email || '';
   if (email === '' || !allowedAccounts.includes(email)) {
-    const redirectUrl = new URL('/auth/logout', process.env.HOST);
+    const redirectUrl = new URL('/auth/logout', process.env.APP_BASE_URL);
     redirectUrl.searchParams.set(
       'returnTo',
-      `${process.env.HOST}login?hint=unauthorized_user`
+      `${process.env.APP_BASE_URL}/login?hint=unauthorized_user`
     );
 
     redirect(redirectUrl.toString());

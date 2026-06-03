@@ -4,7 +4,7 @@ import { PrimaryButton } from '../_components/buttons/buttons';
 export default async function Home() {
   const session = await authorize(true);
 
-  const loginReturnTo = encodeURIComponent(`${process.env.HOST}private`);
+  const loginReturnTo = encodeURIComponent(`${process.env.APP_BASE_URL}/private`);
 
   if (!session) {
     return (

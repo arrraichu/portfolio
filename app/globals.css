@@ -56,6 +56,7 @@
     inset 0 -6px 10px -12px hsl(0 0% 85%), /* bottom edge */
     inset 0 2px 3px -1px hsl(0 0% 15%), /* top edge */
     0 0 0 0 transparent; /* transition-matching placeholder */
+  translate: 0 2px;
 }
 
 @utility emboss-edges {
@@ -63,6 +64,7 @@
     inset 0px 10px 10px -10px hsl(0 0% 50% / 50%), /* upper inset */
     inset 0 0 0 0 transparent, /* transition-matching placeholder */
     4px 6px 6px -4px hsl(0 0% 15%); /* bottom shadow */
+  translate: 0 -2px;
 }
 
 @utility noboss-edges {
@@ -70,6 +72,7 @@
     inset 0 0 0 transparent,
     inset 0 0 0 transparent,
     0 0 0 0 transparent;
+  translate: 0;
 }
 
 [data-theme="dark"] {

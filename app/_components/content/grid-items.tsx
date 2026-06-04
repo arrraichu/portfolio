@@ -20,7 +20,7 @@ export function GridTextItem({ title, subtitle }: Readonly<{
         'flex flex-col m-2 py-6 px-8 gap-5',
         'rounded-lg bg-(--boss-color)',
         'emboss-edges hover:deboss-edges hover:translate-y-0.5',
-        'transition-shadow duration-150 ease-in'
+        'transition duration-150 ease-in'
       )}
     >
       <div className="text-xl text-center md:text-left font-bold underline underline-offset-8">{title}</div>

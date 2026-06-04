@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Bars3Icon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 
 import GitIcon from '@/public/git.svg';
@@ -31,12 +32,24 @@ export default function Nav() {
       >
         <nav className="flex justify-between items-center px-5 md:px-8">
           <div className="left-content flex gap-2 lg:gap-8">
-            <Image className="lg:hidden" src="/vdiamond.svg" width={24} height={24} alt="Website icon" />
-            <span className="text-xl font-medium [text-box:trim-end_cap_alphabetic] align-baseline lg:hidden!">Raymond Chu</span>
+            <Link href="/">
+              <Image className="lg:hidden" src="/vdiamond.svg" width={24} height={24} alt="Website icon" />
+            </Link>
+            <Link href="/">
+              <span className="text-xl font-medium [text-box:trim-end_cap_alphabetic] align-baseline lg:hidden!">
+                Raymond Chu
+              </span>
+            </Link>
 
             <div className="hidden lg:flex gap-2">
-              <Image src="/vdiamond.svg" width={24} height={24} alt="Website icon" />
-              <span className="text-xl font-medium [text-box:trim-end_cap_alphabetic] align-baseline">Raymond Chu</span>
+              <Link href="/">
+                <Image src="/vdiamond.svg" width={24} height={24} alt="Website icon" />
+              </Link>
+              <Link href="/">
+                <span className="text-xl font-medium [text-box:trim-end_cap_alphabetic] align-baseline">
+                  Raymond Chu
+                </span>
+              </Link>
             </div>
             <div className="hidden lg:flex gap-4 items-center">
               <a className="opacity-75 hover:opacity-100"

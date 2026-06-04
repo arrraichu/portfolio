@@ -22,7 +22,13 @@ export default function Nav() {
 
   return (
     <>
-      <header className="fixed w-full h-(--navbar-height) py-4 bg-(--site-color) border-b-[1.5px] border-b-(--line-color) z-50">
+      <header
+        className={clsx(
+          'fixed w-full z-50 h-(--navbar-height) py-4',
+          'bg-(--site-color) border-b-[1.5px] border-b-(--line-color)',
+          'shadow-[0px_-16px_12px_12px_var(--line-color)]'
+        )}
+      >
         <nav className="flex justify-between items-center px-5 md:px-8">
           <div className="left-content flex gap-2 lg:gap-8">
             <Image className="lg:hidden" src="/vdiamond.svg" width={24} height={24} alt="Website icon" />
@@ -57,10 +63,40 @@ export default function Nav() {
               onClick={() => setMenuOpen(!menuOpen)}
             />
 
-            <div className="hidden lg:flex gap-4 items-end">
-              <span className="text-xl font-bold px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:outline-2 hover:outline-(--accent-color) hover:rounded-sm hover:cursor-pointer">Portfolio</span>
-              <span className="text-xl font-bold px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:outline-2 hover:outline-(--accent-color) hover:rounded-sm hover:cursor-pointer">Demos</span>
-              <span className="text-xl font-bold px-1 text-(--accent-color) opacity-75 hover:opacity-100 hover:outline-2 hover:outline-(--accent-color) hover:rounded-sm hover:cursor-pointer">Resume</span>
+            <div className="hidden lg:flex gap-3 items-end">
+              <span
+                className={clsx(
+                  'px-2 opacity-75 rounded-md',
+                  'text-xl font-extrabold tracking-wide text-(--accent-color)',
+                  'noboss-edges hover:deboss-edges hover:cursor-pointer hover:translate-y-0.5',
+                  'dark:outline-(--line-color) dark:hover:outline-1',
+                  'transition-all duration-150 ease-in'
+                )}
+              >
+                Portfolio
+              </span>
+              <span
+                className={clsx(
+                  'px-2 opacity-75 rounded-md',
+                  'text-xl font-extrabold tracking-wide text-(--accent-color)',
+                  'noboss-edges hover:deboss-edges hover:cursor-pointer hover:translate-y-0.5',
+                  'dark:outline-(--line-color) dark:hover:outline-1',
+                  'transition-all duration-150 ease-in'
+                )}
+              >
+                Demos
+              </span>
+              <span
+                className={clsx(
+                  'px-2 opacity-75 rounded-md',
+                  'text-xl font-extrabold tracking-wide text-(--accent-color)',
+                  'noboss-edges hover:deboss-edges hover:cursor-pointer hover:translate-y-0.5',
+                  'dark:outline-(--line-color) dark:hover:outline-1',
+                  'transition-all duration-150 ease-in'
+                )}
+              >
+                Resume
+              </span>
             </div>
             <div className="hidden lg:flex gap-6 items-center">
               <SunIcon

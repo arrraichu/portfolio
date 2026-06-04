@@ -53,14 +53,23 @@
 
 @utility deboss-edges {
   box-shadow:
-    inset 0 -2px 8px -6px hsl(0 0% 95%),
-    inset 0 2px 3px -1px hsl(0 0% 15%);
+    inset 0 -6px 10px -12px hsl(0 0% 85%), /* bottom edge */
+    inset 0 2px 3px -1px hsl(0 0% 15%), /* top edge */
+    0 0 0 0 transparent; /* transition-matching placeholder */
 }
 
 @utility emboss-edges {
   box-shadow:
-    inset 0px 6px 8px -8px hsl(0 0% 95% / 55%),
-    4px 6px 6px -4px hsl(0 0% 15%);
+    inset 0px 10px 10px -10px hsl(0 0% 50% / 50%), /* upper inset */
+    inset 0 0 0 0 transparent, /* transition-matching placeholder */
+    4px 6px 6px -4px hsl(0 0% 15%); /* bottom shadow */
+}
+
+@utility noboss-edges {
+  box-shadow:
+    inset 0 0 0 transparent,
+    inset 0 0 0 transparent,
+    0 0 0 0 transparent;
 }
 
 [data-theme="dark"] {

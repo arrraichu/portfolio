@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 export function GridItems({ children }: Readonly<{
   children?: React.ReactNode
 }>) {
@@ -13,7 +15,14 @@ export function GridTextItem({ title, subtitle }: Readonly<{
   subtitle?: string
 }>) {
   return (
-    <div className="flex flex-col m-2 py-6 px-8 rounded-lg border-2 gap-5 bg-(--site-color) hover:bg-(--boss-color) transition-colors">
+    <div
+      className={clsx(
+        'flex flex-col m-2 py-6 px-8 gap-5',
+        'rounded-lg bg-(--boss-color)',
+        'emboss-edges hover:deboss-edges hover:translate-y-0.5',
+        'transition-shadow duration-150 ease-in'
+      )}
+    >
       <div className="text-xl text-center md:text-left font-bold underline underline-offset-8">{title}</div>
       <div className="text-md text-center md:text-left">{subtitle}</div>
     </div>

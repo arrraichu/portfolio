@@ -79,33 +79,36 @@ export default function Nav() {
             <div className="hidden lg:flex gap-3 items-end">
               <span
                 className={clsx(
-                  'px-2 opacity-75 rounded-md',
+                  'px-2 opacity-75 rounded-md select-none',
                   'text-xl font-extrabold tracking-wide text-(--accent-color)',
-                  'noboss-edges hover:deboss-edges hover:cursor-pointer hover:translate-y-0.5',
+                  'noboss-edges hover:deboss-edges hover:cursor-pointer',
                   'dark:outline-(--line-color) dark:hover:outline-1',
-                  'transition-all duration-150 ease-in'
+                  'transition-all duration-150 ease-in',
+                  'active:[box-shadow:none] active:transition-none active:translate-none'
                 )}
               >
                 Portfolio
               </span>
               <span
                 className={clsx(
-                  'px-2 opacity-75 rounded-md',
+                  'px-2 opacity-75 rounded-md select-none',
                   'text-xl font-extrabold tracking-wide text-(--accent-color)',
-                  'noboss-edges hover:deboss-edges hover:cursor-pointer hover:translate-y-0.5',
+                  'noboss-edges hover:deboss-edges hover:cursor-pointer',
                   'dark:outline-(--line-color) dark:hover:outline-1',
-                  'transition-all duration-150 ease-in'
+                  'transition-all duration-150 ease-in',
+                  'active:[box-shadow:none] active:transition-none active:translate-none'
                 )}
               >
                 Demos
               </span>
               <span
                 className={clsx(
-                  'px-2 opacity-75 rounded-md',
+                  'px-2 opacity-75 rounded-md select-none',
                   'text-xl font-extrabold tracking-wide text-(--accent-color)',
-                  'noboss-edges hover:deboss-edges hover:cursor-pointer hover:translate-y-0.5',
+                  'noboss-edges hover:deboss-edges hover:cursor-pointer',
                   'dark:outline-(--line-color) dark:hover:outline-1',
-                  'transition-all duration-150 ease-in'
+                  'transition-all duration-150 ease-in',
+                  'active:[box-shadow:none] active:transition-none active:translate-none'
                 )}
               >
                 Resume

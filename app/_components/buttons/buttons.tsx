@@ -9,9 +9,9 @@ export function PrimaryButton({ text }: Readonly<{
         'px-4 py-2',
         'rounded-lg bg-(--button-color-primary-fill)',
         'text-(--button-color-primary-font)',
-        'emboss-edges hover:deboss-edges hover:translate-y-0.5',
-        'hover:shadow-sm hover:shadow-violet-700 dark:hover:shadow-emerald-50 active:shadow-none',
-        'transition duration-150 ease-in'
+        'emboss-edges hover:deboss-edges',
+        'transition duration-150 ease-in',
+        'active:[box-shadow:none] active:transition-none active:translate-none'
       )}
     >
       {text}
@@ -28,9 +28,9 @@ export function SecondaryButton({ text }: Readonly<{
         'px-4 py-2',
         'rounded-lg bg-(--button-color-secondary-fill)',
         'text-(--button-color-secondary-font)',
-        'emboss-edges hover:deboss-edges hover:translate-y-0.5',
-        'hover:shadow-sm hover:shadow-violet-500 dark:hover:shadow-emerald-600 active:shadow-none',
-        'transition duration-150 ease-in'
+        'emboss-edges hover:deboss-edges',
+        'transition duration-150 ease-in',
+        'active:[box-shadow:none] active:transition-none active:translate-none'
       )}
     >
       {text}

@@ -19,8 +19,9 @@ export function GridTextItem({ title, subtitle }: Readonly<{
       className={clsx(
         'flex flex-col m-2 py-6 px-8 gap-5',
         'rounded-lg bg-(--boss-color)',
-        'emboss-edges hover:deboss-edges hover:translate-y-0.5',
-        'transition duration-150 ease-in'
+        'emboss-edges hover:deboss-edges',
+        'transition duration-150 ease-in',
+        'active:[box-shadow:none] active:transition-none active-translate-none'
       )}
     >
       <div className="text-xl text-center md:text-left font-bold underline underline-offset-8">{title}</div>

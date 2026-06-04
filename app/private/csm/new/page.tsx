@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, Dispatch } from 'react';
+import { z } from 'zod';
 
-import Title from '@/app/_components/title/title';
+import Input from '@/app/_components/input/input';
 import Select from '@/app/_components/select/select';
+import Title from '@/app/_components/title/title';
 
 interface ContentType {
   code: string,
@@ -15,8 +17,14 @@ const contentTypes: ContentType[] = [
   { code: 'standard', label: 'standard' }
 ];
 
+const ContentSchema = z.object({
+
+});
+type ContentForm = z.infer<typeof ContentSchema>;
+
 export default function NewContent() {
   const [selectedContentType, setContentType] = useState<ContentType>(contentTypes[0]);
+  const [sequence, setSequence] = useState<string>('');
 
   return (
     <>
@@ -30,7 +38,13 @@ export default function NewContent() {
         getItemString={ i => (i as ContentType).label.toUpperCase() }
         getItemKey={ i => (i as ContentType).code }
       />
-      
+
+      <Input
+        preLabel="Sequence:"
+        placeholder="-1"
+        value={sequence}
+        setValue={setSequence}
+      />
     </>
   );
 }

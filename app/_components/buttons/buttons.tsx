@@ -11,7 +11,7 @@ export function PrimaryButton({ text }: Readonly<{
         'text-(--button-color-primary-font)',
         'emboss-edges hover:deboss-edges hover:translate-y-0.5',
         'hover:shadow-sm hover:shadow-violet-700 dark:hover:shadow-emerald-50 active:shadow-none',
-        'transition-shadow duration-150 ease-in'
+        'transition duration-150 ease-in'
       )}
     >
       {text}

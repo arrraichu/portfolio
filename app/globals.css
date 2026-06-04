@@ -25,6 +25,8 @@
   --icon-color-interaction-stroke-dark: var(--color-emerald-50);
   --highlight-color-light: var(--color-amber-300);
   --highlight-color-dark: var(--color-amber-700);
+  --boss-color-light: var(--color-emerald-200);
+  --boss-color-dark: var(--color-indigo-800);
 
   --navbar-height: 3.5rem;
 
@@ -40,22 +42,25 @@
   --button-color-secondary-hover: var(--buton-color-secondary-hover-light);
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-light);
   --highlight-color: var(--highlight-color-light);
-
-  --deboss-color-light: var(--color-emerald-400);
-  --deboss-color-dark: var(--color-indigo-600);
-  --deboss-color: var(--deboss-color-light);
-
-  --deboss-color-toneshift-light: var(--color-emerald-600);
-  --deboss-color-toneshift-dark: var(--color-indigo-400);
-  --deboss-color-toneshift: var(--deboss-color-toneshift-light);
+  --boss-color: var(--boss-color-light);
 }
 
 @theme inline {
   --font-sans:
     var(--font-inter), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 
-  --inset-shadow-md: inset 0px -2.5px 0 var(--deboss-color-toneshift);
+@utility deboss-edges {
+  box-shadow:
+    inset 0 -2px 8px -6px hsl(0 0% 95%),
+    inset 0 2px 3px -1px hsl(0 0% 15%);
+}
+
+@utility emboss-edges {
+  box-shadow:
+    inset 0px 6px 8px -8px hsl(0 0% 95% / 55%),
+    4px 6px 6px -4px hsl(0 0% 15%);
 }
 
 [data-theme="dark"] {
@@ -71,9 +76,7 @@
   --button-color-secondary-hover: var(--button-color-secondary-hover-dark);
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-dark);
   --highlight-color: var(--highlight-color-dark);
-
-  --deboss-color: var(--deboss-color-dark);
-  --deboss-color-toneshift: var(--deboss-color-toneshift-dark);
+  --boss-color: var(--boss-color-dark);
 }
 
 body {

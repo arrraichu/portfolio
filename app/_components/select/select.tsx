@@ -23,7 +23,7 @@ export default function Select({ preLabel, selected, setSelected, allItems, getI
       <Listbox value={selected} onChange={setSelected}>
 
         {preLabel && (
-          <Label className="block px-2 text-sm font-medium text-(--font-color)">
+          <Label className="block px-2 text-md font-semibold text-(--font-color)">
             {preLabel}
           </Label>
         )}
@@ -33,9 +33,9 @@ export default function Select({ preLabel, selected, setSelected, allItems, getI
           <ListboxButton
             className={clsx(
               'flex justify-between gap-4 w-50 pl-4 pr-2 py-2',
-              'rounded-lg bg-(--deboss-color)',
+              'rounded-lg bg-(--boss-color)',
               'text-sm text-left text-(--font-color)',
-              'inset-ring-2 inset-ring-(--deboss-color-toneshift)/75 inset-shadow-md',
+              'deboss-edges',
               'focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline:white/25'
             )}
           >
@@ -53,8 +53,8 @@ export default function Select({ preLabel, selected, setSelected, allItems, getI
             transition
             className={clsx(
               'flex flex-col w-50 mt-1',
-              'rounded-lg bg-(--deboss-color)',
-              'inset-ring-2 inset-ring-(--deboss-color-toneshift)/75 inset-shadow-md',
+              'rounded-lg bg-(--boss-color)',
+              'emboss-edges',
               'focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline:white/25',
               'transition duration-100 ease-in data-leave:data-closed:opacity-0'
             )}
@@ -68,13 +68,13 @@ export default function Select({ preLabel, selected, setSelected, allItems, getI
                 className={clsx(
                   'flex items-center py-1.5 px-2 gap-2',
                   'group cursor-default select-none',
-                  'data-focus:bg-(--deboss-color-toneshift)'
+                  'data-focus:bg-white/25'
                 )}
               >
 
                 <CheckIcon
                   className={clsx(
-                    'size-4 fill-(--fon-color)',
+                    'size-4 fill-(--font-color)',
                     'invisible group-data-selected:visible'
                   )}
                 />

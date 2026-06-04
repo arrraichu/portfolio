@@ -13,7 +13,7 @@ export function GridTextItem({ title, subtitle }: Readonly<{
   subtitle?: string
 }>) {
   return (
-    <div className="flex flex-col m-2 py-6 px-8 rounded-lg border-2 gap-5 bg-(--site-color) hover:bg-(--deboss-color-toneshift) transition-colors">
+    <div className="flex flex-col m-2 py-6 px-8 rounded-lg border-2 gap-5 bg-(--site-color) hover:bg-(--boss-color) transition-colors">
       <div className="text-xl text-center md:text-left font-bold underline underline-offset-8">{title}</div>
       <div className="text-md text-center md:text-left">{subtitle}</div>
     </div>

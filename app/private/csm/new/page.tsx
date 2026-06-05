@@ -6,6 +6,8 @@ import { z } from 'zod';
 import Input from '@/app/_components/input/input';
 import Select from '@/app/_components/select/select';
 import Title from '@/app/_components/title/title';
+import Textarea from '@/app/_components/input/textarea';
+
 
 interface ContentType {
   code: string,
@@ -25,6 +27,7 @@ type ContentForm = z.infer<typeof ContentSchema>;
 export default function NewContent() {
   const [selectedContentType, setContentType] = useState<ContentType>(contentTypes[0]);
   const [sequence, setSequence] = useState<string>('');
+  const [text, setText] = useState<string>('');
 
   return (
     <>
@@ -45,6 +48,14 @@ export default function NewContent() {
         value={sequence}
         setValue={setSequence}
       />
+
+      <Textarea
+        preLabel="Text:"
+        rows={4}
+        value={text}
+        setValue={setText}
+      />
+
     </>
   );
 }

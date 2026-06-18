@@ -3,7 +3,7 @@ import Link from 'next/link';
 import authorize from '@/app/_lib/authorize';
 import Title from '@/app/_components/title/title';
 
-import { GridItems, GridTextItem } from '../_components/content/grid-items';
+import { GridItems, GridTextItem } from '../_components/grid/grid-items';
 
 const _CURRENT_PATHNAME = "/private";
 

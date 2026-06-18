@@ -11,7 +11,7 @@ export default function TextButtonsContent({
   secondaryButtonHref?: string
 }>) {
   return (
-    <section className="flex flex-col py-5 px-5 md:px-10 lg:px-18 gap-2">
+    <section className="flex flex-col py-8 px-5 md:px-10 lg:px-18 gap-2">
       <h2>{title}</h2>
       <span className="my-2 px-2">{text}</span>
       <div className="flex pt-4 gap-2">

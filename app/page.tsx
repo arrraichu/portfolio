@@ -1,5 +1,5 @@
-import TextContent from "./_components/content/text-content";
-import TextButtonsContent from "./_components/content/text-buttons-content";
+import TextContent from './_components/content/text-content';
+import TextButtonsContent from './_components/content/text-buttons-content';
 
 export default function Home() {
   return (

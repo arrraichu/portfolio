@@ -1,19 +1,26 @@
 'use client';
 
-import { useCallback, useEffect, useState, Dispatch } from 'react';
+import Form from 'next/form';
+import { useActionState, useCallback, useEffect, useState, Dispatch } from 'react';
 
+import { PrimaryButton } from '@/app/_components/buttons/buttons';
 import Input from '@/app/_components/input/input';
 import Select from '@/app/_components/select/select';
 import Title from '@/app/_components/title/title';
 
+import { createContent } from '@/app/_forms/content';
+
 import {
   API_PATH_CONTENT,
+  INITIAL_CONTENT_STATE,
   ContentType,
   PLACEHOLDER_CONTENT_TYPE,
   getUserInput
 } from '@/app/_types/content';
 
 export default function NewContent() {
+  const [actionState, formAction] = useActionState(createContent, INITIAL_CONTENT_STATE);
+
   const [page, setPage] = useState<string>('');
   const [sequence, setSequence] = useState<string>('');
 
@@ -69,32 +76,51 @@ export default function NewContent() {
     <>
       <Title title="Create new content" subtitle="" />
 
-      <Input
-        preLabel="Page:"
-        placeholder="Enter a page path..."
-        value={page}
-        setValue={setPage}
-      />
+      <Form action={formAction}>
 
-      <Select
-        preLabel="Content Type:"
-        selected={selectedContentType}
-        setSelected={setContentType as Dispatch<unknown>}
-        allItems={contentTypes}
-        getItemString={ i => (i as ContentType).label.toUpperCase() }
-        getItemKey={ i => (i as ContentType).code }
-      />
+        <Input
+          name="page_path"
+          preLabel="Page:"
+          placeholder="Enter a page path..."
+          error={actionState.errors.page_path}
+          value={page}
+          setValue={setPage}
+        />
 
-      <Input
-        preLabel="Sequence:"
-        placeholder="-1"
-        value={sequence}
-        setValue={setSequence}
-      />
+        <Select
+          name="content_type"
+          preLabel="Content Type:"
+          selected={selectedContentType}
+          setSelected={setContentType as Dispatch<unknown>}
+          allItems={contentTypes}
+          getItemString={ i => (i as ContentType).label.toUpperCase() }
+          getItemKey={ i => (i as ContentType).code }
+        />
 
-      {selectedContentType.reqs && (selectedContentType.reqs as string).split(',').map(
-        (req: string) => getUserInput(req, (content[req] as string) ?? '', value => setContent(req, value))
-      )}
+        <Input
+          name="sequence"
+          preLabel="Sequence:"
+          placeholder="-1"
+          error={actionState.errors.sequence}
+          value={sequence}
+          setValue={setSequence}
+        />
+
+        {selectedContentType.reqs && (selectedContentType.reqs as string).split(',').map(
+          (req: string) => getUserInput(
+            req,
+            (content[req] as string) ?? '',
+            value => setContent(req, value),
+            actionState.errors[req]
+          )
+        )}
+
+        <PrimaryButton
+          type="submit"
+          text="Save"
+        />
+      
+      </Form>
 
     </>
   );

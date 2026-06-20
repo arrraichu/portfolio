@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import { Field, Label, Textarea } from '@headlessui/react';
 import { Dispatch } from 'react';
 
-export default function CustomTextarea({ preLabel, rows, value, setValue }: Readonly<{
+export default function CustomTextarea({ name, preLabel, rows, value, setValue }: Readonly<{
+  name?: string,
   preLabel?: string,
   rows: number,
   value: string,
@@ -22,6 +23,7 @@ export default function CustomTextarea({ preLabel, rows, value, setValue }: Read
         <div className="flex mt-2 px-2">
 
           <Textarea
+            name={name}
             value={value}
             onChange={e => setValue(e.target.value)}
             rows={rows}

@@ -3,9 +3,11 @@ import clsx from 'clsx';
 import { Field, Label, Input } from '@headlessui/react';
 import { Dispatch } from 'react';
 
-export default function CustomInput({ preLabel, placeholder, value, setValue }: Readonly<{
+export default function CustomInput({ name, preLabel, placeholder, error, value, setValue }: Readonly<{
+  name?: string,
   preLabel?: string,
   placeholder?: string,
+  error?: string,
   value: string,
   setValue: Dispatch<string>
 }>) {
@@ -14,14 +16,22 @@ export default function CustomInput({ preLabel, placeholder, value, setValue }: 
       <Field>
 
         {preLabel && (
-          <Label className="block px-2 text-md font-semibold text-(--font-color)">
-            {preLabel}
-          </Label>
+          <div className="flex gap-2">
+            <Label className="block px-2 text-md font-semibold text-(--font-color)">
+              {preLabel}
+            </Label>
+            {error && 
+              <span className="inline-block text-red-600 dark:text-red-400 font-medium self-end text-sm">
+                {error}
+              </span>
+            }
+          </div>
         )}
 
         <div className="flex mt-2 px-2">
 
           <Input
+            name={name}
             placeholder={placeholder || ''}
             value={value}
             onChange={e => setValue(e.target.value)}

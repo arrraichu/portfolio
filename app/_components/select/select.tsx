@@ -10,7 +10,8 @@ import {
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Dispatch } from 'react';
 
-export default function Select({ preLabel, selected, setSelected, allItems, getItemString, getItemKey }: Readonly<{
+export default function Select({ name, preLabel, selected, setSelected, allItems, getItemString, getItemKey }: Readonly<{
+  name?: string,
   preLabel?: string;
   selected: unknown,
   setSelected: Dispatch<unknown>,
@@ -20,7 +21,7 @@ export default function Select({ preLabel, selected, setSelected, allItems, getI
 }>) {
   return (
     <section className="flex flex-col py-5 px-5 md:px-10 lg:px-18">
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox name={name} value={selected} onChange={setSelected}>
 
         {preLabel && (
           <Label className="block px-2 text-md font-semibold text-(--font-color)">

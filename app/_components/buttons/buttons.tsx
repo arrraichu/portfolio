@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 
-export function PrimaryButton({ text }: Readonly<{
-  text: string
+export function PrimaryButton({ text, type }: Readonly<{
+  text: string,
+  type?: 'button' | 'submit' | 'reset'
 }>) {
   return (
     <button
@@ -13,6 +14,7 @@ export function PrimaryButton({ text }: Readonly<{
         'transition duration-150 ease-in',
         'active:[box-shadow:none] active:transition-none active:translate-none'
       )}
+      type={type ?? 'button'}
     >
       {text}
     </button>

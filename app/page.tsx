@@ -1,7 +1,31 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
 import TextContent from './_components/content/text-content';
 import TextButtonsContent from './_components/content/text-buttons-content';
+import { useThemes } from './_hooks/theme-provider';
+import { Content } from './_types/content';
+
+const PAGE_PATH = '/';
 
 export default function Home() {
+  const { fetchContent } = useThemes();
+
+  const [contentsLoaded, setContentsLoaded] = useState<boolean>(false);
+  const [contents, setContents] = useState<Content[]>([]);
+
+  useEffect(() => {
+    if (contentsLoaded) return;
+
+    async function loadContents() {
+      const res: Content[] = await fetchContent(PAGE_PATH);
+      setContents(res);
+      setContentsLoaded(true);
+    }
+    loadContents();
+  }, [contentsLoaded, fetchContent]);
+
   return (
     <>
       <TextButtonsContent

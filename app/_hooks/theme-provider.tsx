@@ -1,12 +1,15 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
+
+import { API_PATH_CONTENT, Content } from '@/app/_types/content';
 
 interface ThemeContextFields {
   theme: string;
   flipTheme: () => void;
   menuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
+  fetchContent: (path: string) => Promise<Content[]>;
 }
 
 const INITIAL_THEME_CONTEXT : ThemeContextFields = {
@@ -14,6 +17,7 @@ const INITIAL_THEME_CONTEXT : ThemeContextFields = {
   flipTheme: () => {},
   menuOpen: false,
   setMenuOpen: () => {},
+  fetchContent: () => Promise.resolve([]),
 };
 
 const ThemeContext = createContext<ThemeContextFields>(INITIAL_THEME_CONTEXT);
@@ -31,12 +35,39 @@ export function ThemeProvider({ children }: Readonly<{
     }
   }
 
+  const [savedContent, setSavedContent] = useState<{[p: string]: Content[]}>({});
+  const fetchContent = useCallback(async (path: string): Promise<Content[]> => {
+    if (savedContent[path]) {
+      return savedContent[path];
+    }
+
+    let contents : Content[] = [];
+    try {
+      const res = await fetch(`${API_PATH_CONTENT}?page_path=${encodeURIComponent(path)}`);
+      if (!res.ok) {
+        throw new Error(`Request failed: ${res.status}.`);
+      }
+
+      contents = await res.json() as Content[];
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
+
+    const newSavedContent = { ...savedContent };
+    newSavedContent[path] = contents;
+    setSavedContent(newSavedContent);
+
+    return contents;
+  }, [savedContent, setSavedContent]);
+
   const initialContext = {
     ...INITIAL_THEME_CONTEXT,
     theme,
     flipTheme,
     menuOpen,
     setMenuOpen,
+    fetchContent,
   };
 
   useEffect(() => {
@@ -45,7 +76,7 @@ export function ThemeProvider({ children }: Readonly<{
       setTheme(isDark);
     }
     setThemeOnMount();
-  }, [])
+  }, []);
 
   useEffect(() => {
     document.documentElement.classList.add('theme-transition');

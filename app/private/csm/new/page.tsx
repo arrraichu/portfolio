@@ -11,7 +11,7 @@ import Title from '@/app/_components/title/title';
 import { createContent } from '@/app/_forms/content';
 
 import {
-  API_PATH_CONTENT,
+  API_PATH_CONTENT_TYPES,
   INITIAL_CONTENT_STATE,
   ContentType,
   PLACEHOLDER_CONTENT_TYPE,
@@ -47,7 +47,7 @@ export default function NewContent() {
 
     async function load() {
       try {
-        const res = await fetch(API_PATH_CONTENT);
+        const res = await fetch(API_PATH_CONTENT_TYPES);
         if (!res.ok) throw new Error(`Request failed: ${res.status}.`);
         if (!ignoreAfterUnmount) {
           const types : ContentType[] = await res.json();
@@ -115,10 +115,12 @@ export default function NewContent() {
           )
         )}
 
-        <PrimaryButton
-          type="submit"
-          text="Save"
-        />
+        <div className=" py-5 px-8 md:px-12 lg:px-20">
+          <PrimaryButton
+            type="submit"
+            text="Save"
+          />
+        </div>
       
       </Form>
 

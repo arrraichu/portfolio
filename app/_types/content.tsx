@@ -217,7 +217,7 @@ export function getUserInput(
 
 const ContentInitialSchemaObject = {
   page_path: z.string(),
-  content_type: z.string(),
+  type: z.string(),
   index: z.number(),
 
   header: z.optional(z.string()),

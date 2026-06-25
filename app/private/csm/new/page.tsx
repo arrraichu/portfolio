@@ -7,6 +7,7 @@ import { PrimaryButton } from '@/app/_components/buttons/buttons';
 import Input from '@/app/_components/input/input';
 import Select from '@/app/_components/select/select';
 import Title from '@/app/_components/title/title';
+import Breadcrumb from '@/app/_components/navigation/breadcrumb';
 
 import { createContent } from '@/app/_forms/content';
 
@@ -17,6 +18,13 @@ import {
   PLACEHOLDER_CONTENT_TYPE,
   getUserInput
 } from '@/app/_types/content';
+
+const PAGE_BREADCRUMBS = [
+  { name: 'Home', location: '/' },
+  { name: 'Private', location: '/private' },
+  { name: 'Content Management', location: '/private/cms' },
+  { name: 'Create', location: '/private/cms/new' }
+]
 
 export default function NewContent() {
   const [actionState, formAction] = useActionState(createContent, INITIAL_CONTENT_STATE);
@@ -74,6 +82,8 @@ export default function NewContent() {
 
   return (
     <>
+      <Breadcrumb crumbs={PAGE_BREADCRUMBS} />
+
       <Title title="Create new content" subtitle="" />
 
       <Form action={formAction}>

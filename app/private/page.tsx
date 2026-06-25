@@ -4,8 +4,14 @@ import authorize from '@/app/_lib/authorize';
 import Title from '@/app/_components/title/title';
 
 import { GridItems, GridTextItem } from '../_components/grid/grid-items';
+import Breadcrumb from '../_components/navigation/breadcrumb';
 
 const _CURRENT_PATHNAME = "/private";
+
+const PAGE_BREADCRUMBS = [
+  { name: 'Home', location: '/' },
+  { name: 'Private', location: '/private' }
+];
 
 export default async function Home() {
   const session = await authorize(false, { returnTo: _CURRENT_PATHNAME })
@@ -21,6 +27,8 @@ export default async function Home() {
 
   return (
     <>
+      <Breadcrumb crumbs={PAGE_BREADCRUMBS} />
+
       <Title
         title={`Welcome ${session!.user.name}`}
         subtitle="Your projects..." />

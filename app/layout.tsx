@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
           <Navigation />
-          <main className="w-full flex flex-col mt-(--navbar-height) p-2 gap-2 lg:max-w-5xl lg:mx-auto">
+          <main className="w-full flex flex-col mt-(--navbar-height) gap-2 lg:max-w-5xl lg:mx-auto">
             {children}
           </main>
         </ThemeProvider>

@@ -1,7 +1,8 @@
-import TitleContent from "./title-content";
-import TextContent from "./text-content";
-import TextButtonsContent from "./text-buttons-content";
-import { Content } from "@/app/_types/content";
+import TitleContent from './title-content';
+import DisclaimerContent from './disclaimer-content';
+import TextContent from './text-content';
+import TextButtonsContent from './text-buttons-content';
+import { Content } from '@/app/_types/content';
 
 export default function MapContent({ content }: Readonly<{
   content: Content
@@ -12,6 +13,15 @@ export default function MapContent({ content }: Readonly<{
     case 'title': {
       return (
         <TitleContent
+          title={content.header ?? ''}
+          text={content.textblock1 ?? ''}
+        />
+      );
+    }
+
+    case 'disclaimer': {
+      return (
+        <DisclaimerContent
           title={content.header ?? ''}
           text={content.textblock1 ?? ''}
         />

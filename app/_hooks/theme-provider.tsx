@@ -2,14 +2,21 @@
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
-import { API_PATH_CONTENT, Content } from '@/app/_types/content';
+import {
+  API_PATH_CONTENT,
+  API_PATH_CONTENT_TYPES,
+  Content,
+  ContentType
+} from '@/app/_types/content';
 
 interface ThemeContextFields {
   theme: string;
   flipTheme: () => void;
   menuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
-  fetchContent: (path: string) => Promise<Content[]>;
+  fetchContent: (path: string, fetchAll?: boolean) => Promise<Content[]>;
+  invalidateContent: () => void;
+  contentTypes: ContentType[]
 }
 
 const INITIAL_THEME_CONTEXT : ThemeContextFields = {
@@ -18,6 +25,8 @@ const INITIAL_THEME_CONTEXT : ThemeContextFields = {
   menuOpen: false,
   setMenuOpen: () => {},
   fetchContent: () => Promise.resolve([]),
+  invalidateContent: () => {},
+  contentTypes: []
 };
 
 const ThemeContext = createContext<ThemeContextFields>(INITIAL_THEME_CONTEXT);
@@ -35,15 +44,21 @@ export function ThemeProvider({ children }: Readonly<{
     }
   }
 
+  const [contentTypesLoaded, setContentTypesLoaded] = useState<boolean>(false);
+  const [contentTypes, setContentTypes] = useState<ContentType[]>([]);
+
   const [savedContent, setSavedContent] = useState<{[p: string]: Content[]}>({});
-  const fetchContent = useCallback(async (path: string): Promise<Content[]> => {
+  const fetchContent = useCallback(async (path: string, fetchAll?: boolean): Promise<Content[]> => {
     if (savedContent[path]) {
       return savedContent[path];
     }
 
     let contents : Content[] = [];
     try {
-      const res = await fetch(`${API_PATH_CONTENT}?page_path=${encodeURIComponent(path)}`);
+      const url = fetchAll
+        ? `${API_PATH_CONTENT}?fetch_all=true`
+        : `${API_PATH_CONTENT}?page_path=${encodeURIComponent(path)}`;
+      const res = await fetch(url);
       if (!res.ok) {
         throw new Error(`Request failed: ${res.status}.`);
       }
@@ -61,6 +76,10 @@ export function ThemeProvider({ children }: Readonly<{
     return contents;
   }, [savedContent, setSavedContent]);
 
+  const invalidateContent = useCallback(() => {
+    setSavedContent({});
+  }, [setSavedContent]);
+
   const initialContext = {
     ...INITIAL_THEME_CONTEXT,
     theme,
@@ -68,6 +87,8 @@ export function ThemeProvider({ children }: Readonly<{
     menuOpen,
     setMenuOpen,
     fetchContent,
+    invalidateContent,
+    contentTypes
   };
 
   useEffect(() => {
@@ -77,6 +98,25 @@ export function ThemeProvider({ children }: Readonly<{
     }
     setThemeOnMount();
   }, []);
+
+  useEffect(() => {
+    if (contentTypesLoaded) return;
+
+    async function loadContentTypes() {
+      try {
+        const res = await fetch(API_PATH_CONTENT_TYPES);
+        if (!res.ok) throw new Error(`Fetch content types request failed: ${res.status}`);
+
+        const types: ContentType[] = await res.json();
+
+        setContentTypesLoaded(true);
+        setContentTypes(types);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    loadContentTypes();
+  }, [contentTypesLoaded]);
 
   useEffect(() => {
     document.documentElement.classList.add('theme-transition');

@@ -216,6 +216,7 @@ export function getUserInput(
 };
 
 const ContentInitialSchemaObject = {
+  id: z.number(),
   page_path: z.string(),
   type: z.string(),
   index: z.number(),

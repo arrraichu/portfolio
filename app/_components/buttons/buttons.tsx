@@ -21,8 +21,9 @@ export function PrimaryButton({ text, type }: Readonly<{
   );
 }
 
-export function SecondaryButton({ text }: Readonly<{
+export function SecondaryButton({ text, type }: Readonly<{
   text: string
+  type?: 'button' | 'submit' | 'reset'
 }>) {
   return (
     <button
@@ -34,6 +35,7 @@ export function SecondaryButton({ text }: Readonly<{
         'transition duration-150 ease-in',
         'active:[box-shadow:none] active:transition-none active:translate-none'
       )}
+      type={type ?? 'button'}
     >
       {text}
     </button>

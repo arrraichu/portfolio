@@ -10,13 +10,16 @@ interface ServerResponse {
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams ?? {};
-  const pathname = searchParams.get('page_path');
-  if (!pathname) {
+  const fetchAll = searchParams.get('fetch_all');
+  const pathname= searchParams.get('page_path');
+  if (!fetchAll && !pathname) {
     return Response.json([]);
   }
 
-  const url = `${process.env.PORTFOLIO_SERVER_URL}/content?page_path=${encodeURIComponent(pathname)}`;
-  const res = await fetch(url);
+  const url = fetchAll
+    ? `${process.env.PORTFOLIO_SERVER_URL}/content?force_fetch_all=true`
+    : `${process.env.PORTFOLIO_SERVER_URL}/content?page_path=${encodeURIComponent(pathname!)}`;
+  const res = await fetch(url, { cache: 'force-cache', next: { tags: ['content'] } });
 
   const responseBody = await res.json() as ServerResponse;
   if (!responseBody.ok) {

@@ -1,6 +1,7 @@
 'use client';
 
 import Form from 'next/form';
+import { useRouter } from 'next/navigation';
 import { useActionState, useCallback, useEffect, useState, Dispatch } from 'react';
 
 import { PrimaryButton } from '@/app/_components/buttons/buttons';
@@ -10,12 +11,12 @@ import Title from '@/app/_components/title/title';
 import Breadcrumb from '@/app/_components/navigation/breadcrumb';
 
 import { createContent } from '@/app/_forms/content';
+import { useThemes } from '@/app/_hooks/theme-provider';
 
 import {
-  API_PATH_CONTENT_TYPES,
   INITIAL_CONTENT_STATE,
-  ContentType,
   PLACEHOLDER_CONTENT_TYPE,
+  ContentType,
   getUserInput
 } from '@/app/_types/content';
 
@@ -27,20 +28,19 @@ const PAGE_BREADCRUMBS = [
 ]
 
 export default function NewContent() {
+  const { contentTypes, invalidateContent } = useThemes();
   const [actionState, formAction] = useActionState(createContent, INITIAL_CONTENT_STATE);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (actionState.status === 200) {
+      invalidateContent();
+      router.push('/private');
+    }
+  }, [actionState.status, invalidateContent, router]);
 
   const [page, setPage] = useState<string>('');
   const [sequence, setSequence] = useState<string>('');
-
-  const [contentTypes, setContentTypes] = useState<ContentType[]>([]);
-  // const [loadingTypes, setLoadingTypes] = useState<boolean>(true);
-  const [selectedContentType, changeContentType] = useState<ContentType>(
-    PLACEHOLDER_CONTENT_TYPE
-  );
-  const setContentType = (type: ContentType) => {
-    setAllContent({});
-    changeContentType(type);
-  };
 
   const [content, setAllContent] = useState<{ [k: string]: unknown }>({});
   const setContent = useCallback((name: string, value: unknown) => {
@@ -49,36 +49,14 @@ export default function NewContent() {
     setAllContent(newContent);
   }, [content, setAllContent]);
 
-  useEffect(() => {
+  const [selectedContentType, changeContentType] 
+    = useState<ContentType | null>(null);
+  const setContentType = (type: ContentType) => {
+    setAllContent({});
+    changeContentType(type);
+  };
 
-    let ignoreAfterUnmount = false;
-
-    async function load() {
-      try {
-        const res = await fetch(API_PATH_CONTENT_TYPES);
-        if (!res.ok) throw new Error(`Request failed: ${res.status}.`);
-        if (!ignoreAfterUnmount) {
-          const types : ContentType[] = await res.json();
-
-          setContentTypes(types);
-          setContentType(types[0]);
-        }
-      } catch (err) {
-        if (!ignoreAfterUnmount) {
-          console.error(err);
-        }
-      } finally {
-        if (!ignoreAfterUnmount) {
-          // setLoadingTypes(false);
-        }
-      }
-    }
-
-    load();
-
-    return () => { ignoreAfterUnmount = true; }
-
-  }, []);
+  const activeContentType = selectedContentType ?? contentTypes[0] ?? PLACEHOLDER_CONTENT_TYPE;
 
   return (
     <>
@@ -99,8 +77,8 @@ export default function NewContent() {
 
         <Select
           name="content_type"
-          preLabel="Content Type:"
-          selected={selectedContentType}
+          preLabel="Content type:"
+          selected={activeContentType}
           setSelected={setContentType as Dispatch<unknown>}
           allItems={contentTypes}
           getItemString={ i => (i as ContentType).label.toUpperCase() }
@@ -116,7 +94,7 @@ export default function NewContent() {
           setValue={setSequence}
         />
 
-        {selectedContentType.reqs && (selectedContentType.reqs as string).split(',').map(
+        {activeContentType.reqs && (activeContentType.reqs as string).split(',').map(
           (req: string) => getUserInput(
             req,
             (content[req] as string) ?? '',

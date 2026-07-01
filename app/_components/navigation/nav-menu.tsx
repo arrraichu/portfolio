@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { ArrowRightCircleIcon } from "@heroicons/react/24/outline";
+import Link from 'next/link';
 
 import GitIcon from '@/public/git.svg';
 
@@ -23,34 +24,40 @@ export default function NavMenu({ref, isOpen, setOpen}: {
         <NavMenuItemMainBlock
           title="Portfolio"
           description="The tech stack used in this site"
-          href="#" />
+          href="/portfolio"
+          setOpen={setOpen} />
         <NavMenuItemMainBlock
           title="Demos"
           description="Things worth showing off"
-          href="#" />
+          href="/demos"
+          setOpen={setOpen} />
         <NavMenuItemMainBlock
           title="Resume"
           description="My past experiences"
-          href="#" />
+          href="/resume"
+          setOpen={setOpen} />
         <NavMenuItemBottomBlock />
       </div>
     </nav>
   );
 }
 
-function NavMenuItemMainBlock({ title, description, href }: Readonly<{
+function NavMenuItemMainBlock({ title, description, href, setOpen }: Readonly<{
   title: string,
   description: string,
   href: string,
+  setOpen: (open: boolean) => void
 }>) {
   return (
-    <div className="w-full flex flex-col gap-2 py-5 px-5 md:px-8 border-b border-b-(--line-color)">
-      <div className="text-xs text-(--accent-color) font-semibold uppercase tracking-wider">{title}</div>
-      <div className="flex justify-between">
-        <span className="text-xl px-0">{description}</span>
-        <ArrowRightCircleIcon className="size-6 text-(--accent-color)" />
+    <Link href={href} onNavigate={() => setOpen(false)}>
+      <div className="w-full flex flex-col gap-2 py-5 px-5 md:px-8 border-b border-b-(--line-color)">
+        <div className="text-xs text-(--accent-color) font-semibold uppercase tracking-wider">{title}</div>
+        <div className="flex justify-between">
+          <span className="text-xl px-0">{description}</span>
+          <ArrowRightCircleIcon className="size-6 text-(--accent-color)" />
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

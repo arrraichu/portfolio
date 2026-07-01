@@ -2,11 +2,11 @@
 
 import clsx from 'clsx';
 import { useRef } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Bars3Icon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
 import { EnvelopeIcon } from '@heroicons/react/24/solid';
 
+import SiteIcon from '@/public/siteicon.svg';
 import GitIcon from '@/public/git.svg';
 import LinkedInIcon from '@/public/linkedin.svg';
 
@@ -36,7 +36,7 @@ export default function Nav() {
         <nav className="flex justify-between items-center px-5 md:px-8">
           <div className="left-content flex gap-2 lg:gap-8">
             <Link href="/">
-              <Image className="lg:hidden" src="/vdiamond.svg" width={24} height={24} alt="Website icon" />
+              <SiteIcon className="size-6 lg:hidden" />
             </Link>
             <Link href="/">
               <span className="text-xl font-medium [text-box:trim-end_cap_alphabetic] align-baseline lg:hidden!">
@@ -46,7 +46,7 @@ export default function Nav() {
 
             <div className="hidden lg:flex gap-2">
               <Link href="/">
-                <Image src="/vdiamond.svg" width={24} height={24} alt="Website icon" />
+                <SiteIcon className="size-6" />
               </Link>
               <Link href="/">
                 <span className="text-xl font-medium [text-box:trim-end_cap_alphabetic] align-baseline">

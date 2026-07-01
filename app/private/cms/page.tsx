@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react';
 import Form from 'next/form';
+import Link from 'next/link';
 import { useActionState, useCallback, useEffect, useState, Dispatch } from 'react';
 
 import { XCircleIcon } from '@heroicons/react/24/solid';
@@ -201,7 +202,9 @@ export default function CMSPage() {
       />
 
       <section className="py-2 md:py-3 lg:py-4 px-7 md:px-12 lg:px-20 gap-2">
-        <PrimaryButton text="Create new" />
+        <Link href="/private/cms/new">
+          <PrimaryButton text="Create new" />
+        </Link>
       </section>
 
       <section

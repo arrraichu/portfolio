@@ -5,15 +5,15 @@ on:
       - "main"
       - "releases/**"
     paths:
-      - '**.ts'
-      - '**.tsx'
+      - "**.ts"
+      - "**.tsx"
+      - "**.css"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      
       - uses: actions/checkout@v4
 
       - name: Docker metadata

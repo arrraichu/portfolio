@@ -5,8 +5,11 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Bars3Icon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon } from '@heroicons/react/24/solid';
 
 import GitIcon from '@/public/git.svg';
+import LinkedInIcon from '@/public/linkedin.svg';
+
 import { useThemes } from '@/app/_hooks/theme-provider';
 import NavMenu from './nav-menu';
 import useClickAway from '@/app/_hooks/use-click-away';
@@ -58,6 +61,20 @@ export default function Nav() {
                 rel="noopener noreferrer"
                 aria-label="Github link (opens in new tab)">
                 <GitIcon className="size-5 text-(--accent-color)" />
+              </a>
+              <a className="opacity-75 hover:opacity-100"
+                href="https://www.linkedin.com/in/raymondmchu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn link (opens in new tab)">
+                <LinkedInIcon className="size-5 text-(--accent-color)" />
+              </a>
+              <a className="opacity-75 hover:opacity-100"
+                href="mailto:arrraichu@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Email link (opens in new tab)">
+                <EnvelopeIcon className="size-5 text-(--accent-color)" />
               </a>
             </div>
           </div>

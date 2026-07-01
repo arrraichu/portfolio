@@ -3,6 +3,7 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
+  /* Custom variables for both Light and Dark variants */
   --site-color-light: var(--color-emerald-50);
   --site-color-dark: var(--color-indigo-950);
   --font-color-light: var(--color-black);
@@ -28,8 +29,8 @@
   --boss-color-light: var(--color-emerald-200);
   --boss-color-dark: var(--color-indigo-800);
 
+  /* Global variables defined for the Light variant */
   --navbar-height: 3.5rem;
-
   --site-color: var(--site-color-light);
   --font-color: var(--font-color-light);
   --line-color: var(--line-color-light);
@@ -77,6 +78,7 @@
 }
 
 [data-theme="dark"] {
+  /* Global variables defined for the Dark variant */
   --site-color: var(--site-color-dark);
   --font-color: var(--font-color-dark);
   --line-color: var(--line-color-dark);

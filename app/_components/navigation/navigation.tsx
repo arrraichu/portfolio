@@ -87,7 +87,7 @@ export default function Nav() {
                   'active:[box-shadow:none] active:transition-none active:translate-none'
                 )}
               >
-                Portfolio
+                <Link href="/portfolio">Portfolio</Link>
               </span>
               <span
                 className={clsx(
@@ -99,7 +99,7 @@ export default function Nav() {
                   'active:[box-shadow:none] active:transition-none active:translate-none'
                 )}
               >
-                Demos
+                <Link href="/demos">Demos</Link>
               </span>
               <span
                 className={clsx(
@@ -111,7 +111,7 @@ export default function Nav() {
                   'active:[box-shadow:none] active:transition-none active:translate-none'
                 )}
               >
-                Resume
+                <Link href="/resume">Resume</Link>
               </span>
             </div>
             <div className="hidden lg:flex gap-6 items-center">

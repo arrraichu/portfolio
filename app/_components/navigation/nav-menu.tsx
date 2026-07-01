@@ -1,8 +1,10 @@
 import clsx from 'clsx';
-import { ArrowRightCircleIcon } from "@heroicons/react/24/outline";
 import Link from 'next/link';
+import { ArrowRightCircleIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon } from '@heroicons/react/24/solid';
 
 import GitIcon from '@/public/git.svg';
+import LinkedInIcon from '@/public/linkedin.svg';
 
 export default function NavMenu({ref, isOpen, setOpen}: {
   ref: React.RefObject<HTMLElement | null>,
@@ -65,6 +67,7 @@ function NavMenuItemBottomBlock() {
   return (
     <div className="w-full flex flex-col gap-2 py-5 px-5 md:px-8">
       <div className="text-xs text-(--accent-color) font-semibold uppercase tracking-wider">Contact</div>
+
       <div className="w-full flex py-2 px-4 justify-between">
         <div className="w-full flex content-start">
           <a className="flex gap-2 opacity-75 hover:opacity-100"
@@ -79,13 +82,27 @@ function NavMenuItemBottomBlock() {
         </div>
         <div className="w-full flex content-start">
           <a className="flex gap-2 opacity-75 hover:opacity-100"
-            href="https://github.com/arrraichu"
+            href="https://www.linkedin.com/in/raymondmchu/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Github link (opens in new tab)"
+            aria-label="LinkedIn link (opens in new tab)"
             >
-            <GitIcon className="size-5 text-(--accent-color)" />
-            <span className="text-s px-2">arrraichu</span>
+            <LinkedInIcon className="size-5 text-(--accent-color)" />
+            <span className="text-s px-2">raymondmchu</span>
+          </a>
+        </div>
+      </div>
+
+      <div className="w-full flex py-2 px-4 justify-between">
+        <div className="w-full flex content-start">
+          <a className="flex gap-2 opacity-75 hover:opacity-100"
+            href="mailto:arrraichu@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Email link (opens in new tab)"
+            >
+            <EnvelopeIcon className="size-5 text-(--accent-color)" />
+            <span className="text-s px-2">arrraichu@gmail.com</span>
           </a>
         </div>
       </div>

@@ -34,7 +34,7 @@ export default async function Home() {
         subtitle="Your projects..." />
       
       <GridItems>
-        <Link href="/private/csm">
+        <Link href="/private/cms">
           <GridTextItem title="Content manager" subtitle="Edit your website's content" />
         </Link>
         <a href={`/auth/logout?returnTo=${logoutRedirect}`}>

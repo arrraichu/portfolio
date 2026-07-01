@@ -48,7 +48,7 @@ export async function createContent(initialState: ContentState, formData: FormDa
   };
   if (status !== 200) {
     resp.response = responseBody.error;
-    redirect(`/private/csm/new?error=${resp.response}`);
+    redirect(`/private/cms/new?error=${resp.response}`);
     return resp;
   }
 
@@ -107,7 +107,7 @@ export async function updateContent(initialState: ContentState, formData: FormDa
   };
   if (status != 200) {
     resp.response = responseBody.error;
-    redirect(`/private/csm?error=${resp.response}`);
+    redirect(`/private/cms?error=${resp.response}`);
     return resp;
   }
 

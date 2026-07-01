@@ -54,7 +54,7 @@
 
 @utility deboss-edges {
   box-shadow:
-    inset 0 -6px 10px -12px hsl(0 0% 85%) /*bottom edge */,
+    inset 0 -6px 10px -12px hsl(0 0% 85%) /* bottom edge */,
     inset 0 2px 3px -1px hsl(0 0% 15%) /* top edge */,
     0 0 0 0 transparent; /* transition-matching placeholder */
   translate: 0 2px;

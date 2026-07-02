@@ -34,7 +34,7 @@ export default function Nav() {
         )}
       >
         <nav className="flex justify-between items-center px-5 md:px-8">
-          <div className="left-content flex gap-2 lg:gap-8">
+          <div className="left-content flex gap-5 lg:gap-8">
             <Link href="/">
               <SiteIcon className="size-6 lg:hidden" />
             </Link>
@@ -44,7 +44,7 @@ export default function Nav() {
               </span>
             </Link>
 
-            <div className="hidden lg:flex gap-2">
+            <div className="hidden lg:flex gap-5">
               <Link href="/">
                 <SiteIcon className="size-6" />
               </Link>

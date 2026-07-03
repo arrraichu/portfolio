@@ -9,6 +9,18 @@ import {
   ContentType
 } from '@/app/_types/content';
 
+const THEME_COOKIE_NAME = 'theme';
+const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
+
+function getThemeCookie(): string | null {
+  const match = document.cookie.match(new RegExp(`(?:^|; )${THEME_COOKIE_NAME}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+function setThemeCookie(value: string) {
+  document.cookie = `${THEME_COOKIE_NAME}=${encodeURIComponent(value)}; path=/; max-age=${THEME_COOKIE_MAX_AGE}; SameSite=Lax`;
+}
+
 interface ThemeContextFields {
   theme: string;
   flipTheme: () => void;
@@ -37,11 +49,9 @@ export function ThemeProvider({ children }: Readonly<{
   const [theme, setTheme] = useState<string>('light');
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const flipTheme = () => {
-    if (theme == 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
+    const newTheme = theme == 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    setThemeCookie(newTheme);
   }
 
   const [contentTypesLoaded, setContentTypesLoaded] = useState<boolean>(false);
@@ -93,6 +103,12 @@ export function ThemeProvider({ children }: Readonly<{
 
   useEffect(() => {
     async function setThemeOnMount() {
+      const savedTheme = getThemeCookie();
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        setTheme(savedTheme);
+        return;
+      }
+
       const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       setTheme(isDark);
     }

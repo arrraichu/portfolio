@@ -32,7 +32,7 @@ export default function MapContent({ content }: Readonly<{
     case 'text': {
       return (
         <TextContent
-          title={content.header ?? ''}
+          title={content.header}
           text={content.textblock1 ?? ''}
         />
       );
@@ -41,7 +41,7 @@ export default function MapContent({ content }: Readonly<{
     case 'text_buttons': {
       return (
         <TextButtonsContent
-          title={content.header ?? ''}
+          title={content.header}
           text={content.textblock1 ?? ''}
           primaryButtonText={content.button1text ?? ''}
           primaryButtonHref={content.button1href ?? ''}

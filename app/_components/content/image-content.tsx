@@ -22,7 +22,6 @@ export default function ImageContent({ src, alt, placement }: Readonly<{
           src={src}
           alt={alt}
           fill={true}
-          sizes="100vw"
         />
       </div>
     </section>

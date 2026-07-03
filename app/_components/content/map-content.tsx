@@ -2,6 +2,7 @@ import TitleContent from './title-content';
 import DisclaimerContent from './disclaimer-content';
 import TextContent from './text-content';
 import TextButtonsContent from './text-buttons-content';
+import ImageContent from './image-content';
 import { Content } from '@/app/_types/content';
 
 export default function MapContent({ content }: Readonly<{
@@ -48,6 +49,16 @@ export default function MapContent({ content }: Readonly<{
           secondaryButtonHref={content.button2href}
         />
       );
+    }
+
+    case 'image': {
+      return (
+        <ImageContent
+          src={content.image1src!}
+          alt={content.image1alt || ''}
+          placement={content.image1placement || 'full'}
+        />
+      )
     }
 
     default: {

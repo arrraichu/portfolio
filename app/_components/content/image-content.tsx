@@ -19,7 +19,7 @@ export default function ImageContent({ src, alt, placement }: Readonly<{
       >
         <Image
           className="object-cover rounded-none lg:rounded-lg"
-          src={`/${src}`}
+          src={src}
           alt={alt}
           fill={true}
           sizes="100vw"

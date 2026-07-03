@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         as: '*.js'
       }
     }
+  },
+  images: {
+    remotePatterns: [
+      new URL(`${process.env.R2_PUBLIC_URL}/**`)
+    ]
   }
 };
 

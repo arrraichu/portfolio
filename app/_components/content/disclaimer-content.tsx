@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 export default function DisclaimerContent({ title, text }: Readonly<{
-  title: string,
+  title?: string,
   text: string
 }>) {
   return (
@@ -17,7 +17,9 @@ export default function DisclaimerContent({ title, text }: Readonly<{
           'deboss-edges'
         )}
       >
-        <h3 className="font-semibold!">{title}</h3>
+        {title && title !== '' && (
+          <h3 className="font-semibold!">{title}</h3>
+        )}
         <span className="my-2 px-2">{text}</span>
       </div>
     </section>

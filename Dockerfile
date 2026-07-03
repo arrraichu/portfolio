@@ -46,6 +46,11 @@ COPY . .
 
 ENV NODE_ENV=production
 
+# R2_PUBLIC_URL is read by next.config.ts at build time (images.remotePatterns),
+# so it must be passed in as a build-arg from CI.
+ARG R2_PUBLIC_URL
+ENV R2_PUBLIC_URL=${R2_PUBLIC_URL}
+
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.

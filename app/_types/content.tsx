@@ -43,8 +43,10 @@ export const CONTENT_TYPES = {
 
   IMAGESRC_1 : 'image1src',
   IMAGEALT_1 : 'image1alt',
+  IMAGEPLC_1 : 'image1placement',
   IMAGESRC_2 : 'image2src',
-  IMAGEALT_2 : 'image2alt'
+  IMAGEALT_2 : 'image2alt',
+  IMAGEPLC_2 : 'image2placement'
 };
 
 export function getUserInput(
@@ -209,6 +211,30 @@ export function getUserInput(
       />;
     }
 
+    case CONTENT_TYPES.IMAGEPLC_1: {
+      return <Input
+        key={type}
+        name={type}
+        preLabel="Image 1 placement"
+        placeholder="full"
+        error={errorStr}
+        value={value}
+        setValue={setValue}
+      />;
+    }
+
+    case CONTENT_TYPES.IMAGEPLC_2: {
+      return <Input
+        key={type}
+        name={type}
+        preLabel="Image 2 placement"
+        placeholder="full"
+        error={errorStr}
+        value={value}
+        setValue={setValue}
+      />;
+    }
+
     default: {
       return <div key={type}></div>;
     }
@@ -239,12 +265,16 @@ const ContentInitialSchemaObject = {
 
   image1src: z.optional(z.string()),
   image1alt: z.optional(z.string()),
+  image1placement: z.optional(z.string()),
   image2src: z.optional(z.string()),
   image2alt: z.optional(z.string()),
+  image2placement: z.optional(z.string()),
   image3src: z.optional(z.string()),
   image3alt: z.optional(z.string()),
+  image3placement: z.optional(z.string()),
   image4src: z.optional(z.string()),
-  image4alt: z.optional(z.string())
+  image4alt: z.optional(z.string()),
+  image4placement: z.optional(z.string())
 };
 export const ContentInitialSchema = z.object(ContentInitialSchemaObject);
 export type Content = z.infer<typeof ContentInitialSchema>;

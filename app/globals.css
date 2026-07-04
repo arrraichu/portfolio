@@ -24,8 +24,7 @@
   --button-color-secondary-hover-dark: var(--color-violet-500);
   --icon-color-interaction-stroke-light: var(--color-black);
   --icon-color-interaction-stroke-dark: var(--color-emerald-50);
-  --highlight-color-light: var(--color-amber-300);
-  --highlight-color-dark: var(--color-amber-700);
+  --highlight-color: var(--color-amber-300);
   --boss-color-light: var(--color-emerald-200);
   --boss-color-dark: var(--color-indigo-800);
 
@@ -42,7 +41,6 @@
   --button-color-secondary-font: var(--button-color-secondary-font-light);
   --button-color-secondary-hover: var(--buton-color-secondary-hover-light);
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-light);
-  --highlight-color: var(--highlight-color-light);
   --boss-color: var(--boss-color-light);
   --disclaimer-color: var(--button-color-secondary-fill);
 }
@@ -90,7 +88,6 @@
   --button-color-secondary-font: var(--button-color-secondary-font-dark);
   --button-color-secondary-hover: var(--button-color-secondary-hover-dark);
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-dark);
-  --highlight-color: var(--highlight-color-dark);
   --boss-color: var(--boss-color-dark);
 }
 

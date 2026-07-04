@@ -70,24 +70,22 @@ export function getUserInput(
     }
 
     case CONTENT_TYPES.SUBHEADER_1: {
-      return <Input
+      return <Textarea
         key={type}
         name={type}
         preLabel="Subheader 1"
-        placeholder={type}
-        error={errorStr}
+        rows={2}
         value={value}
         setValue={setValue}
       />;
     }
 
     case CONTENT_TYPES.SUBHEADER_2: {
-      return <Input
+      return <Textarea
         key={type}
         name={type}
         preLabel="Subheader 2"
-        placeholder={type}
-        error={errorStr}
+        rows={2}
         value={value}
         setValue={setValue}
       />;

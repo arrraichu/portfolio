@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
   const url = fetchAll
     ? `${process.env.PORTFOLIO_SERVER_URL}/content?force_fetch_all=true`
     : `${process.env.PORTFOLIO_SERVER_URL}/content?page_path=${encodeURIComponent(pathname!)}`;
-  const res = await fetch(url, { cache: 'force-cache', next: { tags: ['content'] } });
+  const res = await fetch(url, { next: { tags: ['content'] } });
 
   const responseBody = await res.json() as ServerResponse;
   if (!responseBody.ok) {

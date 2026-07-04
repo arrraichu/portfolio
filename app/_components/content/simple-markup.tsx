@@ -80,6 +80,9 @@ function processTag(tag: string, text: string, index: number): React.ReactNode {
         {text}
       </b>;
     }
+    case 'i': {
+      return <div key={index} className="inline italic">{text}</div>;
+    }
     case 'h': {
       return <div
         key={index}

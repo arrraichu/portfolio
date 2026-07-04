@@ -15,6 +15,7 @@ export default function MapContent({ content }: Readonly<{
       return (
         <TitleContent
           title={content.header ?? ''}
+          subheader={content.subheader1}
           text={content.textblock1 ?? ''}
         />
       );

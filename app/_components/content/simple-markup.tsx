@@ -97,6 +97,9 @@ function processTag(tag: string, text: string, index: number): React.ReactNode {
         </span>
       </div>;
     }
+    case 'br': {
+      return <div key={index} className="py-2"></div>;
+    }
     default: {
       return <div key={index} className="inline px-1">{text}</div>;
     }

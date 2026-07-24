@@ -11,6 +11,7 @@ import { XCircleIcon } from '@heroicons/react/24/solid';
 import { updateContent } from '@/app/_forms/content';
 import { useThemes } from '@/app/_hooks/theme-provider';
 import {
+  API_PATH_CONTENT,
   INITIAL_CONTENT_STATE,
   PLACEHOLDER_CONTENT_TYPE,
   Content,
@@ -25,6 +26,12 @@ import Input from '@/app/_components/input/input';
 import Select from '@/app/_components/select/select';
 import { PrimaryButton, SecondaryButton } from '@/app/_components/buttons/buttons';
 
+enum CMSPageDialogState {
+  INACTIVE = 0,
+  EDIT = 1,
+  DELETE = 2
+};
+
 const PAGE_BREADCRUMBS = [
   { name: 'Home', location: '/' },
   { name: 'Private', location: '/private' },
@@ -32,86 +39,152 @@ const PAGE_BREADCRUMBS = [
 ];
 
 export default function CMSPage() {
-  const { contentTypes, fetchContent, invalidateContent } = useThemes();
+  const { contentTypes, loadContents: fetchContent, invalidateContent } = useThemes();
   const [actionState, formAction] = useActionState(updateContent, INITIAL_CONTENT_STATE);
 
-  const [contentsLoaded, setContentsLoaded] = useState<boolean>(false);
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
+  const [lastFormUpdate, setLastFormUpdate] = useState<string>('');
+
   const [contents, setContents] = useState<Content[]>([]);
 
-  const [content, setContentValues] = useState<{ [k: string]: unknown }>({});
-  const setContent = useCallback((name: string, value: unknown) => {
-    const newContent = { ...content };
-    newContent[name] = value;
-    setContentValues(newContent);
-  }, [content, setContentValues]);
+  const [activeContentId, setActiveContentId] = useState<number>(-1);
+  const [activeContent, setActiveContent] = useState<{[k: string]: unknown}>({});
+  const clearActiveContent = () => {
+    setActiveContentId(-1);
+    setActiveContent({});
+  };
+  const editActiveContent = useCallback((key: string, value: unknown) => {
+    const newContent = { ...activeContent };
+    newContent[key] = value;
+    setActiveContent(newContent);
+  }, [activeContent, setActiveContent]);
 
-  const [dialogSetIndex, setDialogSetIndex] = useState<number>(-1);
+  const [dialogState, privateSetDialogState] = useState<CMSPageDialogState>(CMSPageDialogState.INACTIVE);
+  const closeDialog = () => {
+    privateSetDialogState(CMSPageDialogState.INACTIVE);
+    setActiveContentId(-1);
+    setActiveContent({});
+  };
+  const setDialogEditState = useCallback((contentId: number) => {
+    if (contentId < 0 || contentId >= contents.length) {
+      return;
+    }
 
-  const [selectedContentType, changeContentType]
+    setActiveContent({ ...contents[contentId] });
+    setActiveContentId(contentId);
+    privateSetDialogState(CMSPageDialogState.EDIT);
+  }, [contents]);
+  const setDialogDeleteState = useCallback((contentId: number) => {
+    if (contentId < 0 || contentId >= contents.length) {
+      return;
+    }
+
+    setActiveContent({ ...contents[contentId] });
+    setActiveContentId(contentId);
+    privateSetDialogState(CMSPageDialogState.DELETE);
+  }, [contents]);
+  const commitDelete = useCallback(
+    async () => {
+      const { id } = activeContent;
+
+      const res = await fetch(
+        `${API_PATH_CONTENT}/${id}`,
+        {
+          method: 'DELETE'
+        }
+      );
+      if (!res.ok) {
+        console.error('could not get successful response');
+      }
+      const response = await res.json();
+      if (response?.last_updated && response?.last_updated !== lastFormUpdate) {
+        setLastFormUpdate(response.last_updated);
+      }
+
+      closeDialog();
+    },
+    [activeContent, lastFormUpdate]
+  );
+
+  const [selectedContentType, privateSetContentType]
     = useState<ContentType | null>(null);
+  const clearContentType = () => {
+    privateSetContentType(null);
+  };
   const setContentType = useCallback((type: ContentType) => {
+    if (activeContentId < 0 || activeContentId >= contents.length) {
+      setActiveContent({});
+      privateSetContentType(type);
+      return;
+    }
     const newContent: Content = {
-      id: contents[dialogSetIndex].id,
-      page_path: contents[dialogSetIndex].page_path,
-      type: contents[dialogSetIndex].type,
-      index: contents[dialogSetIndex].index
+      id: contents[activeContentId].id,
+      page_path: contents[activeContentId].page_path,
+      type: contents[activeContentId].type,
+      index: contents[activeContentId].index
     };
 
-    setContentValues(newContent);
-    changeContentType(type);
-  }, [contents, dialogSetIndex]);
+    setActiveContent(newContent);
+    privateSetContentType(type);
+  }, [activeContentId, contents]);
   const activeContentType: ContentType
     = selectedContentType ?? contentTypes[0] ?? PLACEHOLDER_CONTENT_TYPE;
+  
+  const resetAll = useCallback(async () => {
+    invalidateContent();
 
-  const setDialogIndex = useCallback((i: number) => {
-    if (i == dialogSetIndex) return;
-    if (i >= contents.length) return;
+    clearContentType();
+    closeDialog();
+    clearActiveContent();
 
-    const c  = contents[i] as { [k: string]: unknown };
-    setContentValues(c);
+    setContents([]);
+  }, [invalidateContent]);
 
-    if (c?.type) {
-      const contentType = contentTypes.find(t => t.code === c.type);
-      if (contentType) {
-        changeContentType(contentType);
-      }
-    }
+  const loadContents = useCallback(async () => {
+    const res: Content[] = await fetchContent({
+      invalidate_saved_content: true,
+      fetch_all: true
+    });
 
-    setDialogSetIndex(i);
-  }, [dialogSetIndex, contents, contentTypes]);
-
-  useEffect(() => {
-    if (actionState.status === 200) {
-      async function resetActiveContent() {
-        invalidateContent();
-        setContentsLoaded(false);
-        setContents([]);
-        setDialogSetIndex(-1);
-      }
-      resetActiveContent();
-    }
-  }, [actionState.status, invalidateContent]);
+    setContents(res);
+    setIsInitialized(true);
+  }, [fetchContent]);
 
   useEffect(() => {
-    if (contentsLoaded) return;
+    if (isInitialized) return;
 
-    console.log('contents loaded:', contentsLoaded);
-
-    async function loadContents() {
-      const res: Content[] = await fetchContent('', true);
-      console.log('reload contents', res);
-      setContents(res);
-      setContentsLoaded(true);
+    async function load() {
+      await loadContents();
     }
-    loadContents();
-  }, [contentsLoaded, fetchContent]);
+    load();
+  }, [isInitialized, loadContents]);
+
+  useEffect(() => {
+    if (!isInitialized) {
+      return;
+    }
+    if (actionState.status !== 200) {
+      return;
+    }
+    if (!actionState.last_updated || actionState.last_updated === lastFormUpdate) {
+      return;
+    }
+
+    async function resetAndReload() {
+      setLastFormUpdate(actionState.last_updated as string);
+
+      await resetAll();
+      await loadContents();
+    }
+    resetAndReload();
+  }, [actionState, isInitialized, resetAll, loadContents, lastFormUpdate])
 
   return (
     <>
       <Dialog
         className="relative z-50 outline-none"
-        open={dialogSetIndex >= 0}
-        onClose={() => setDialogIndex(-1)}
+        open={dialogState !== CMSPageDialogState.INACTIVE}
+        onClose={() => closeDialog()}
       >
         <DialogBackdrop transition className="fixed inset-0 bg-(--line-color)/80 transition duration-150 ease-in-out data-closed:opacity-0" />
 
@@ -125,14 +198,25 @@ export default function CMSPage() {
             )}
           >
             <StandardWrapper>
-              {dialogSetIndex < 0 && (
-                <h1>No content selected...</h1>
-              )}
-
-              {dialogSetIndex >= 0 && (
+              {dialogState === CMSPageDialogState.DELETE && (
                 <>
                   <StandardWrapper>
-                    <span className="text-3xl font-bold">Editing content with id={content.id as string}...</span>
+                    <span className="text-3xl font-bold">
+                      Are you sure you want to delete content with id={ activeContent.id as string } ?
+                    </span>
+                  </StandardWrapper>
+
+                  <div className="flex flex-row py-2 px-8 md:px-12 lg:px-20 gap-2 md:gap-4 lg:gap-6">
+                    <SecondaryButton text="Cancel" onClick={() => closeDialog()} />
+                    <PrimaryButton text="Confirm" onClick={() => commitDelete()} />
+                  </div>
+                </>
+              )}
+
+              {dialogState === CMSPageDialogState.EDIT && (
+                <>
+                  <StandardWrapper>
+                    <span className="text-3xl font-bold">Editing content with id={activeContent.id as string}...</span>
                   </StandardWrapper>
 
                   <Form action={formAction}>
@@ -140,7 +224,7 @@ export default function CMSPage() {
                     <input
                       type="hidden"
                       name="id"
-                      value={content.id as string}
+                      value={activeContent.id as string}
                     />
 
                     <Input
@@ -148,8 +232,8 @@ export default function CMSPage() {
                       preLabel="Page:"
                       placeholder="Enter a page path..."
                       error={actionState.errors.page_path}
-                      value={content['page_path'] as string}
-                      setValue={value => setContent('page_path', value)}
+                      value={activeContent['page_path'] as string}
+                      setValue={value => editActiveContent('page_path', value)}
                     />
 
                     <Select
@@ -167,15 +251,15 @@ export default function CMSPage() {
                       preLabel="Sequence:"
                       placeholder="-1"
                       error={actionState.errors.sequence}
-                      value={content['index'] as string}
-                      setValue={value => setContent('index', value)}
+                      value={activeContent['index'] as string}
+                      setValue={value => editActiveContent('index', value)}
                     />
 
                     {activeContentType.reqs && (activeContentType.reqs as string).split(',').map(
                       (req: string) => getUserInput(
                         req,
-                        (content[req] as string) ?? '',
-                        value => setContent(req, value),
+                        (activeContent[req] as string) ?? '',
+                        value => editActiveContent(req, value),
                         actionState.errors[req]
                       )
                     )}
@@ -251,7 +335,7 @@ export default function CMSPage() {
                 })
                 .map((content: Content, i: number) => (
                   <div key={content.id} 
-                    onClick={() => setDialogIndex(i)}
+                    onClick={() => setDialogEditState(i)}
                     className="table-row hover:bg-(--accent-color)/40 hover:emboss-edges"
                   >
                     <div className="table-cell align-middle p-4 pl-8">{content.id}</div>
@@ -262,9 +346,9 @@ export default function CMSPage() {
                     <div className="table-cell align-middle p-4 pr-8">
                       <XCircleIcon
                         className="size-6 font-normal hover:font-black text-red-600 dark:text-red-400 opacity-50 hover:opacity-100"
-                        onClick={(e) => {
+                        onClick={async (e) => {
                           e.stopPropagation();
-                          console.log('DELETE CLICKED!', content);
+                          setDialogDeleteState(i);
                         }}
                       />
                     </div>

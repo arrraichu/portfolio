@@ -12,10 +12,12 @@ export interface ContentState {
     [k: string]: string
   },
   status?: number,
-  response?: string
+  response?: string,
+  last_updated?: string
 };
 export const INITIAL_CONTENT_STATE: ContentState = {
-  errors: {}
+  errors: {},
+  last_updated: ''
 };
 
 export interface ContentType {

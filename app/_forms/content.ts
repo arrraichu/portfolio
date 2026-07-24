@@ -19,7 +19,8 @@ export async function createContent(initialState: ContentState, formData: FormDa
     return {
       errors: {
         sequence: 'needs to be a number!'
-      }
+      },
+      last_updated: new Date().toISOString()
     }
   }
 
@@ -44,7 +45,8 @@ export async function createContent(initialState: ContentState, formData: FormDa
 
   const resp: ContentState = {
     errors: {},
-    status
+    status,
+    last_updated: new Date().toISOString()
   };
   if (status !== 200) {
     resp.response = responseBody.error;
@@ -64,7 +66,8 @@ export async function updateContent(initialState: ContentState, formData: FormDa
     return {
       errors: {
         id: 'needs to be a number!'
-      }
+      },
+      last_updated: new Date().toISOString()
     };
   }
 
@@ -73,7 +76,8 @@ export async function updateContent(initialState: ContentState, formData: FormDa
     return {
       errors: {
         sequence: 'needs to be a number!'
-      }
+      },
+      last_updated: new Date().toISOString()
     };
   }
 
@@ -103,7 +107,8 @@ export async function updateContent(initialState: ContentState, formData: FormDa
 
   const resp: ContentState = {
     errors: {},
-    status
+    status,
+    last_updated: new Date().toISOString()
   };
   if (status != 200) {
     resp.response = responseBody.error;

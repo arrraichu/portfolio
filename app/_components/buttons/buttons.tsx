@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 
-export function PrimaryButton({ text, type }: Readonly<{
+export function PrimaryButton({ text, type, onClick }: Readonly<{
   text: string,
-  type?: 'button' | 'submit' | 'reset'
+  type?: 'button' | 'submit' | 'reset',
+  onClick?: () => void
 }>) {
   return (
     <button
@@ -15,15 +16,17 @@ export function PrimaryButton({ text, type }: Readonly<{
         'active:[box-shadow:none] active:transition-none active:translate-none'
       )}
       type={type ?? 'button'}
+      onClick={onClick}
     >
       {text}
     </button>
   );
 }
 
-export function SecondaryButton({ text, type }: Readonly<{
+export function SecondaryButton({ text, type, onClick = () => {} }: Readonly<{
   text: string
-  type?: 'button' | 'submit' | 'reset'
+  type?: 'button' | 'submit' | 'reset',
+  onClick?: () => void
 }>) {
   return (
     <button
@@ -36,6 +39,7 @@ export function SecondaryButton({ text, type }: Readonly<{
         'active:[box-shadow:none] active:transition-none active:translate-none'
       )}
       type={type ?? 'button'}
+      onClick={onClick}
     >
       {text}
     </button>

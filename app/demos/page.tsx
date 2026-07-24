@@ -9,7 +9,7 @@ import { Content } from '../_types/content';
 const PAGE_PATH = '/demos';
 
 export default function Portfolio() {
-  const { fetchContent } = useThemes();
+  const { loadContents: fetchContent } = useThemes();
   const [contentsLoaded, setContentsLoaded] = useState<boolean>(false);
   const [contents, setContents] = useState<Content[]>([]);
 
@@ -17,7 +17,7 @@ export default function Portfolio() {
     if (contentsLoaded) return;
 
     async function loadContents() {
-      const res: Content[] = await fetchContent(PAGE_PATH);
+      const res: Content[] = await fetchContent({ path: PAGE_PATH });
       setContents(res);
       setContentsLoaded(true);
     }

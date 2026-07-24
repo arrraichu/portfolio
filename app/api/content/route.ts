@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server';
 
 import { Content } from '@/app/_types/content';
 
-interface ServerResponse {
+export type ServerResponse = {
   ok: boolean;
   error: string;
   posts?: Content[];

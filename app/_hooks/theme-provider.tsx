@@ -21,13 +21,19 @@ function setThemeCookie(value: string) {
   document.cookie = `${THEME_COOKIE_NAME}=${encodeURIComponent(value)}; path=/; max-age=${THEME_COOKIE_MAX_AGE}; SameSite=Lax`;
 }
 
-interface ThemeContextFields {
-  theme: string;
-  flipTheme: () => void;
-  menuOpen: boolean;
-  setMenuOpen: (open: boolean) => void;
-  fetchContent: (path: string, fetchAll?: boolean) => Promise<Content[]>;
-  invalidateContent: () => void;
+type LoadContentsFields = {
+  fetch_all?: boolean,
+  path?: string,
+  invalidate_saved_content?: boolean
+};
+
+type ThemeContextFields = {
+  theme: string,
+  flipTheme: () => void,
+  menuOpen: boolean,
+  setMenuOpen: (open: boolean) => void,
+  loadContents: (options: LoadContentsFields) => Promise<Content[]>,
+  invalidateContent: () => void,
   contentTypes: ContentType[]
 }
 
@@ -36,7 +42,7 @@ const INITIAL_THEME_CONTEXT : ThemeContextFields = {
   flipTheme: () => {},
   menuOpen: false,
   setMenuOpen: () => {},
-  fetchContent: () => Promise.resolve([]),
+  loadContents: () => Promise.resolve([]),
   invalidateContent: () => {},
   contentTypes: []
 };
@@ -58,33 +64,68 @@ export function ThemeProvider({ children }: Readonly<{
   const [contentTypes, setContentTypes] = useState<ContentType[]>([]);
 
   const [savedContent, setSavedContent] = useState<{[p: string]: Content[]}>({});
-  const fetchContent = useCallback(async (path: string, fetchAll?: boolean): Promise<Content[]> => {
-    if (savedContent[path]) {
-      return savedContent[path];
-    }
-
-    let contents : Content[] = [];
-    try {
-      const url = fetchAll
-        ? `${API_PATH_CONTENT}?fetch_all=true`
-        : `${API_PATH_CONTENT}?page_path=${encodeURIComponent(path)}`;
-      const res = await fetch(url);
-      if (!res.ok) {
-        throw new Error(`Request failed: ${res.status}.`);
+  const loadContents = useCallback(
+    async (options: LoadContentsFields): Promise<Content[]> => {
+      if (!options.path && !options.fetch_all) {
+        console.error('A path must be provided and fetch_all is not true.');
+        return [];
       }
 
-      contents = await res.json() as Content[];
-    } catch (err) {
-      console.error(err);
-      return [];
-    }
+      if (!options.invalidate_saved_content) {
+        if (options.fetch_all) {
+          const allContent: Content[] = [];
+          for (const pathContents of Object.values(savedContent)) {
+            allContent.push(...pathContents);
+          }
+          return allContent;
+        }
 
-    const newSavedContent = { ...savedContent };
-    newSavedContent[path] = contents;
-    setSavedContent(newSavedContent);
+        if (savedContent[options.path as string]) {
+          return savedContent[options.path as string];
+        }
+      }
 
-    return contents;
-  }, [savedContent, setSavedContent]);
+      let contents: Content[] = [];
+      try {
+        const url = options.fetch_all
+          ? `${API_PATH_CONTENT}?fetch_all=true`
+          : `${API_PATH_CONTENT}?page_path=${encodeURIComponent(options.path as string)}`;
+        const res = await fetch(url);
+        if (!res.ok) {
+          console.error(`Request failed: ${res.status}.`);
+          return [];
+        }
+
+        contents = await res.json() as Content[];
+      } catch (e) {
+        console.error(e);
+        return [];
+      }
+
+      if (options.fetch_all) {
+        const newSavedContent = contents.reduce(
+          (acc: {[k: string]: Content[]}, current: Content) => {
+            const path: string = current.page_path;
+            if (!acc[path]) {
+              acc[path] = [] as Content[];
+            }
+            acc[path].push(current);
+
+            return acc;
+          },
+          {}
+        );
+        setSavedContent(newSavedContent);
+      } else {
+        const newSavedContent = { ...savedContent };
+        newSavedContent[options.path as string] = contents;
+        setSavedContent(newSavedContent);
+      }
+
+      return contents;
+    },
+    [savedContent]
+  );
 
   const invalidateContent = useCallback(() => {
     setSavedContent({});
@@ -96,7 +137,7 @@ export function ThemeProvider({ children }: Readonly<{
     flipTheme,
     menuOpen,
     setMenuOpen,
-    fetchContent,
+    loadContents,
     invalidateContent,
     contentTypes
   };

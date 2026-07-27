@@ -4,6 +4,7 @@ import TextContent from './text-content';
 import TextButtonsContent from './text-buttons-content';
 import ImageContent from './image-content';
 import { Content } from '@/app/_types/content';
+import FooterContent from './footer-content';
 
 export default function MapContent({ content }: Readonly<{
   content: Content
@@ -60,6 +61,12 @@ export default function MapContent({ content }: Readonly<{
           placement={content.image1placement || 'full'}
         />
       )
+    }
+
+    case 'footer': {
+      return (
+        <FooterContent />
+      );
     }
 
     default: {

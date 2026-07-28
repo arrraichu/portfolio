@@ -9,7 +9,7 @@ export default function TitleContent({ title, subheader, text }: Readonly<{
     <StandardWrapper>
       <h1 className="text-4xl! lg:text-5xl! leading-normal! font-black text-(--accent-color) lg:mb-2">{title}</h1>
       {subheader && subheader !== '' && (
-        <div className="my-2 px-2 font-medium text-lg">
+        <div className="my-2 px-2 font-semibold text-lg">
           {subheader}
         </div>
       )}

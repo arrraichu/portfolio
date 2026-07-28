@@ -8,9 +8,11 @@ export default function TextContent({ title, text }: Readonly<{
   return (
     <StandardWrapper>
       {title && title !== '' && (
-        <h2>{title}</h2>
+        <h2 className="font-stretch-expanded underline underline-offset-6 decoration-4 decoration-(--accent-color)">
+          {title.toUpperCase()}
+        </h2>
       )}
-      {SimpleMarkup(text, "my-2 px-2")}
+      {SimpleMarkup(text, "my-1 px-2")}
       
     </StandardWrapper>
   );

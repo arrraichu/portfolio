@@ -5,7 +5,7 @@
 :root {
   /* Custom variables for both Light and Dark variants */
   --site-color-light: var(--color-emerald-50);
-  --site-color-dark: var(--color-indigo-950);
+  --site-color-dark: var(--color-blue-950);
   --font-color-light: var(--color-black);
   --font-color-dark: var(--color-emerald-50);
   --line-color-light: var(--color-slate-400);
@@ -24,7 +24,8 @@
   --button-color-secondary-hover-dark: var(--color-violet-500);
   --icon-color-interaction-stroke-light: var(--color-black);
   --icon-color-interaction-stroke-dark: var(--color-emerald-50);
-  --highlight-color: var(--color-amber-300);
+  --highlight-color-light: var(--color-amber-300);
+  --highlight-color-dark: var(--color-yellow-300);
   --boss-color-light: var(--color-emerald-200);
   --boss-color-dark: var(--color-indigo-800);
 
@@ -43,6 +44,7 @@
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-light);
   --boss-color: var(--boss-color-light);
   --disclaimer-color: var(--button-color-secondary-fill);
+  --highlight-color: var(--highlight-color-light);
 }
 
 @theme inline {
@@ -89,6 +91,7 @@
   --button-color-secondary-hover: var(--button-color-secondary-hover-dark);
   --icon-color-interaction-stroke: var(--icon-color-interaction-stroke-dark);
   --boss-color: var(--boss-color-dark);
+  --highlight-color: var(--highlight-color-dark);
 }
 
 body {

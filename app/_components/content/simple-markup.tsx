@@ -110,7 +110,10 @@ function processTag(tag: string, text: string, index: number, extras: string): R
       )}>{text}</div>;
     }
     case 'br': {
-      return <div key={index} className="py-2"></div>;
+      return <div
+        key={index}
+        className={clsx(PADDING_Y_CLASSES[extras] ?? PADDING_Y_CLASSES['1'])}
+      />;
     }
     default: {
       return <div key={index} className="inline px-1">{text}</div>;
@@ -129,4 +132,15 @@ const COLOR_CLASSES: Record<string, string> = {
   green: 'border-green-700/50 bg-green-300 dark:border-green-300/50 dark:bg-green-700',
   blue: 'border-blue-700/50 bg-blue-300 dark:border-blue-300/50 dark:bg-blue-700',
   violet: 'border-violet-700/50 bg-violet-300 dark:border-violet-300/50 dark:bg-violet-700'
+};
+
+const PADDING_Y_CLASSES: Record<string, string> = {
+  '1': 'py-1',
+  '2': 'py-2',
+  '3': 'py-3',
+  '4': 'py-4',
+  '5': 'py-5',
+  '6': 'py-6',
+  '7': 'py-7',
+  '8': 'py-8',
 };

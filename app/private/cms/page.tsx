@@ -45,13 +45,18 @@ export default function CMSPage() {
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
   const [lastFormUpdate, setLastFormUpdate] = useState<string>('');
 
+  const [dialogState, privateSetDialogState] = useState<CMSPageDialogState>(CMSPageDialogState.INACTIVE);
+
   const [contents, setContents] = useState<Content[]>([]);
 
   const [activeContentId, setActiveContentId] = useState<number>(-1);
   const [activeContent, setActiveContent] = useState<{[k: string]: unknown}>({});
+  const [selectedContentType, privateSetContentType] = useState<ContentType | null>(null);
+  
   const clearActiveContent = () => {
     setActiveContentId(-1);
     setActiveContent({});
+    privateSetContentType(null);
   };
   const editActiveContent = useCallback((key: string, value: unknown) => {
     const newContent = { ...activeContent };
@@ -59,7 +64,7 @@ export default function CMSPage() {
     setActiveContent(newContent);
   }, [activeContent, setActiveContent]);
 
-  const [dialogState, privateSetDialogState] = useState<CMSPageDialogState>(CMSPageDialogState.INACTIVE);
+  
   const closeDialog = () => {
     privateSetDialogState(CMSPageDialogState.INACTIVE);
     setActiveContentId(-1);
@@ -70,10 +75,15 @@ export default function CMSPage() {
       return;
     }
 
+    const newContentType = contentTypes.find(t => t.code === contents[contentId]?.type);
+    if (newContentType) {
+      privateSetContentType(newContentType);
+    }
+    
     setActiveContent({ ...contents[contentId] });
     setActiveContentId(contentId);
     privateSetDialogState(CMSPageDialogState.EDIT);
-  }, [contents]);
+  }, [contentTypes, contents]);
   const setDialogDeleteState = useCallback((contentId: number) => {
     if (contentId < 0 || contentId >= contents.length) {
       return;
@@ -106,8 +116,6 @@ export default function CMSPage() {
     [activeContent, lastFormUpdate]
   );
 
-  const [selectedContentType, privateSetContentType]
-    = useState<ContentType | null>(null);
   const clearContentType = () => {
     privateSetContentType(null);
   };
@@ -127,6 +135,7 @@ export default function CMSPage() {
     setActiveContent(newContent);
     privateSetContentType(type);
   }, [activeContentId, contents]);
+
   const activeContentType: ContentType
     = selectedContentType ?? contentTypes[0] ?? PLACEHOLDER_CONTENT_TYPE;
   
@@ -265,7 +274,7 @@ export default function CMSPage() {
                     )}
 
                     <div className="flex flex-row py-5 px-8 md:px-12 lg:px-20 gap-2">
-                      <SecondaryButton type="reset" text="Cancel" />
+                      <SecondaryButton type="reset" text="Cancel" onClick={() => closeDialog()} />
                       <PrimaryButton type="submit" text="Submit" />
                     </div>
 
@@ -305,8 +314,7 @@ export default function CMSPage() {
           <div className="w-full table table-auto max-h-1/2 border-collapse text-sm">
             <div className="table-header-group">
               <div className="table-row">
-                <div className="table-cell font-bold text-left border-b-[1.5px] border-b-(--line-color) p-4 pl-8">ID</div>
-                <div className="table-cell font-bold text-left border-b-[1.5px] border-b-(--line-color) p-4">Path</div>
+                <div className="table-cell font-bold text-left border-b-[1.5px] border-b-(--line-color) p-4 pl-8">Path</div>
                 <div className="table-cell font-bold text-left border-b-[1.5px] border-b-(--line-color) p-4">Type</div>
                 <div className="table-cell font-bold text-left border-b-[1.5px] border-b-(--line-color) p-4">Seq.</div>
                 <div className="table-cell font-bold text-left border-b-[1.5px] border-b-(--line-color) p-4">Header</div>
@@ -338,8 +346,7 @@ export default function CMSPage() {
                     onClick={() => setDialogEditState(i)}
                     className="table-row hover:bg-(--accent-color)/40 hover:emboss-edges"
                   >
-                    <div className="table-cell align-middle p-4 pl-8">{content.id}</div>
-                    <div className="table-cell align-middle p-4">{content.page_path}</div>
+                    <div className="table-cell align-middle p-4 pl-8">{content.page_path}</div>
                     <div className="table-cell align-middle p-4">{content.type}</div>
                     <div className="table-cell align-middle p-4">{content.index}</div>
                     <div className="table-cell align-middle p-4">{content.header}</div>
